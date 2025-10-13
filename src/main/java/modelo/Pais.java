@@ -1,4 +1,4 @@
-package com.gestionhotelera.tpgestionhoteleradeso.modelo;
+package modelo;
 
 public class Pais {
 
