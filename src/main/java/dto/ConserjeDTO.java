@@ -14,6 +14,12 @@ public class ConserjeDTO {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
     }
+    public ConserjeDTO() {
+    }
+    public ConserjeDTO(String username, String password) {
+        this.usuario = username;
+        this.contrasenia = password;
+    }
     //getters y setters
     public String getNombre() {
         return nombre;
