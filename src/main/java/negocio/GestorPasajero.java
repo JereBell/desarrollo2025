@@ -21,8 +21,12 @@ public class GestorPasajero {
     //metodos
     public PasajeroDTO buscarPasajero() throws IOException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Ingrese el nombre del pasajero a buscar:");
-        String nombre = scanner.nextLine();
-        return pasajeroImp.buscarPasajeros(nombre);
+        try {
+            System.out.println("Ingrese el nombre del pasajero a buscar:");
+            String nombre = scanner.nextLine();
+            return pasajeroImp.buscarPasajeros(nombre);
+        } finally {
+            scanner.close();
+        }
     }
 }

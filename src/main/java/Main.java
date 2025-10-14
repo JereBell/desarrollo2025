@@ -30,7 +30,13 @@ public class Main {
             case 2:
                System.out.println("Caso de uso 2 seleccionado.");
                pasajero = gestorPasajero.buscarPasajero();
-               System.out.println("Pasajero encontrado: " + pasajero.getNombres() + " " + pasajero.getApellido());
+               if(pasajero != null){
+                  System.out.println("Pasajero encontrado: " + pasajero.getNombres() + " " + pasajero.getApellido());
+               }
+               else{
+                  System.out.println("Pasajero no encontrado.");
+               }
+               
 
                break;
             default:
