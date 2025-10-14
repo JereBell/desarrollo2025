@@ -18,6 +18,8 @@ public class GestorConserje {
         System.out.print("Ingrese su password: ");
         String password = sc.nextLine();
 
+        sc.close();
+
         conserjeDTO = new ConserjeDTO(username, password);
         conserjeImp = new ConserjeImp();
         
