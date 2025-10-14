@@ -25,7 +25,7 @@ public class PasajeroImp implements PasajeroDAO {
             linea = reader.readLine(); // Leer la primera línea (encabezados)
             while ((linea = reader.readLine()) != null) {
                 String[] datos = linea.split(","); //obtengo un string por cada campo separado por coma
-                if (datos[1].equalsIgnoreCase(nombre)) {
+                if (datos[1].equalsIgnoreCase(nombre)) { //si encaja el nombre
                     pasajero.setApellido(datos[0]);
                     pasajero.setNombres(datos[1]);
                     pasajero.setNroDocumento(datos[2]);
@@ -34,6 +34,12 @@ public class PasajeroImp implements PasajeroDAO {
                     pasajero.setEmail(datos[5]);
                     pasajero.setTelefono(datos[6]);
                     pasajero.setOcupacion(datos[7]);
+                }
+
+                // falta buscar por todos los otros campos y capaz deberia devolver una lista en campos que no sean unicos
+
+                else{
+                    pasajero = null;
                 }
             }
             return pasajero;
