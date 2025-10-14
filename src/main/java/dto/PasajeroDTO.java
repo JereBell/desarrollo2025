@@ -25,6 +25,10 @@ public class PasajeroDTO {
         this.ocupacion = ocupacion;
     }
 
+    public PasajeroDTO() {
+        //TODO Auto-generated constructor stub
+    }
+
     //getters y setters
     public String getNombres() {
         return nombres;
