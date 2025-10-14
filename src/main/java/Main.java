@@ -16,25 +16,29 @@ public class Main {
 
 
       Scanner scanner = new Scanner(System.in);
-      System.out.println("Ingrese un número de caso de uso a ejecutar:");
-      Integer numero = scanner.nextInt();
-      PasajeroDTO pasajero = new PasajeroDTO();
+      try {
+         System.out.println("Ingrese un número de caso de uso a ejecutar:");
+         Integer numero = scanner.nextInt();
+         PasajeroDTO pasajero = new PasajeroDTO();
 
-      switch (numero) {
-         case 1:
-            System.out.println("Caso de uso 1 seleccionado.");
-            gestorConserje.autenticarUsuario();
+         switch (numero) {
+            case 1:
+               System.out.println("Caso de uso 1 seleccionado.");
+               gestorConserje.autenticarUsuario();
 
-            break;
-         case 2:
-            System.out.println("Caso de uso 2 seleccionado.");
-            pasajero = gestorPasajero.buscarPasajero();
-            System.out.println("Pasajero encontrado: " + pasajero.getNombres() + " " + pasajero.getApellido());
+               break;
+            case 2:
+               System.out.println("Caso de uso 2 seleccionado.");
+               pasajero = gestorPasajero.buscarPasajero();
+               System.out.println("Pasajero encontrado: " + pasajero.getNombres() + " " + pasajero.getApellido());
 
-            break;
-         default:
-            System.out.println("Caso de uso no válido.");
-            break;
+               break;
+            default:
+               System.out.println("Caso de uso no válido.");
+               break;
+         }
+      } finally {
+         scanner.close();
       }
    }
 
