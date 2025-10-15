@@ -39,6 +39,14 @@ public class Main {
 
                break;
             case 9:
+               //ingresar los datos
+               
+               //validar los datos
+                  //solicitar reingreso
+               //si toca cancelar
+                  //botones si y no
+               //verificar que no exista el dni
+                  //corregir
                
                break;
 

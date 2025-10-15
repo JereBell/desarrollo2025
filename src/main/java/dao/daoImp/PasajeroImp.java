@@ -49,11 +49,21 @@ public class PasajeroImp implements PasajeroDAO {
         return null;
     }
 
-    @Override
+        @Override
         public void modificarPasajero(PasajeroDTO pasajero) {
             // TODO Auto-generated method stub
             throw new UnsupportedOperationException("Unimplemented method 'modificarPasajero'");
         }
+    
+        @Override
+        public void agregarPasajero(PasajeroDTO pasajero) {
+            // TODO Auto-generated method stub
+            // guarda en el csv todos los datos ingresados
+            throw new UnsupportedOperationException("Unimplemented method 'agregarPasajero'");
+        }
+
+
+
     }
 
 

@@ -9,6 +9,7 @@ public interface PasajeroDAO {
 
     public void modificarPasajero(PasajeroDTO pasajero);
     public PasajeroDTO buscarPasajeros(String nombre);
+    public void agregarPasajero(PasajeroDTO pasajero);
    /* public PasajeroDTO buscarPasajero(String apellido);
     public PasajeroDTO buscarPasajero(String nroDocumento);
     public PasajeroDTO buscarPasajero(String CUIT);
