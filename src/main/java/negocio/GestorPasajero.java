@@ -52,7 +52,7 @@ public class GestorPasajero {
         // Aquí podrías agregar validaciones adicionales según sea necesario
 
         // Guardar el nuevo pasajero en la base de datos
-        pasajeroImp.agregarPasajero(pasajero);
+        // pasajeroImp.agregarPasajero(pasajero); lo comento porque no esta implementado
         System.out.println("Pasajero agregado exitosamente.");
 
         return pasajero;

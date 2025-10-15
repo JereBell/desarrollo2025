@@ -40,7 +40,8 @@ public class Main {
                break;
             case 9:
                //ingresar los datos
-               
+               System.out.println("Caso de uso 9 seleccionado.");
+               pasajero = gestorPasajero.agregarPasajero();
                //validar los datos
                   //solicitar reingreso
                //si toca cancelar
