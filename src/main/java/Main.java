@@ -36,8 +36,9 @@ public class Main {
                else{
                   System.out.println("Pasajero no encontrado.");
                }
-               
-
+               break;
+            case 9:
+               System.out.println("entro y termino");
                break;
             default:
                System.out.println("Caso de uso no válido.");
