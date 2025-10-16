@@ -1,6 +1,3 @@
-
-
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -41,14 +38,15 @@ public class Main {
             case 9:
                //ingresar los datos
                System.out.println("Caso de uso 9 seleccionado.");
-               pasajero = gestorPasajero.agregarPasajero();
                //validar los datos
+               
+
                   //solicitar reingreso
                //si toca cancelar
                   //botones si y no
                //verificar que no exista el dni
                   //corregir
-               
+               pasajero = gestorPasajero.agregarPasajero();
                break;
 
             default:

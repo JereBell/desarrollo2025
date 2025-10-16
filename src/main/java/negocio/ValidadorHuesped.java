@@ -1,13 +1,17 @@
+package negocio;
+
+import dto.PasajeroDTO;
+
 public class ValidadorHuesped {
 
     // Valida un DTO completo
-    public static void validar(HuespedDTO huesped) throws IllegalArgumentException {
+    public static void validar(PasajeroDTO huesped) throws IllegalArgumentException {
         if (huesped == null)
             throw new IllegalArgumentException("El huésped no puede ser nulo.");
 
-        validarNombre(huesped.getNombre());
+        validarNombre(huesped.getNombres());
         validarApellido(huesped.getApellido());
-        validarDni(huesped.getDni());
+        validarDni(huesped.getNroDocumento());
         validarEmail(huesped.getEmail());
         validarTelefono(huesped.getTelefono());
     }

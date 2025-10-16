@@ -36,23 +36,27 @@ public class GestorPasajero {
 
         System.out.println("Ingrese el nombre del pasajero:");
         pasajero.setNombres(reader.readLine());
+        ValidadorHuesped.validarNombre(pasajero.getNombres());
 
         System.out.println("Ingrese el apellido del pasajero:");
         pasajero.setApellido(reader.readLine());
+        ValidadorHuesped.validarApellido(pasajero.getApellido());
 
         System.out.println("Ingrese el Número de documento del pasajero:");
         pasajero.setNroDocumento(reader.readLine());
+        ValidadorHuesped.validarDni(pasajero.getNroDocumento());
 
         System.out.println("Ingrese el teléfono del pasajero:");
         pasajero.setTelefono(reader.readLine());
+        ValidadorHuesped.validarTelefono(pasajero.getTelefono());
 
         System.out.println("Ingrese el correo electrónico del pasajero:");
         pasajero.setEmail(reader.readLine());
-
-        // Aquí podrías agregar validaciones adicionales según sea necesario
+        ValidadorHuesped.validarEmail(pasajero.getEmail());
 
         // Guardar el nuevo pasajero en la base de datos
         // pasajeroImp.agregarPasajero(pasajero); lo comento porque no esta implementado
+        
         System.out.println("Pasajero agregado exitosamente.");
 
         return pasajero;
