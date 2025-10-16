@@ -163,70 +163,70 @@ public class GestorPasajero {
         int opcion;
         boolean opcionValida;
 
-do {
-    System.out.println("1. CONTINUAR");
-    System.out.println("2. CANCELAR");
-    System.out.print("Ingrese una opción: ");
-    opcion = sc.nextInt();
-    opcionValida = true;
+        do {
+            System.out.println("1. CONTINUAR");
+            System.out.println("2. CANCELAR");
+            System.out.print("Ingrese una opción: ");
+            opcion = sc.nextInt();
+            opcionValida = true;
 
-    switch (opcion) {
-        case 1: //CONTINUAR
+            switch (opcion) {
+                case 1: //CONTINUAR
 
 
 
-            sc.close();
-            break;
+                    sc.close();
+                    break;
 
-        case 2: //CANCELAR
-            int opcionCancela;
-            boolean opcionValidaCancela;
-            do {
-                    System.out.println("Desea cancelar el alta de huesped?");
-                    System.out.println("1. SI");
-                    System.out.println("2. NO");
-                    System.out.print("Ingrese una opción: ");
-                    opcionCancela = sc.nextInt();
-                    opcionValidaCancela = true;
+                case 2: //CANCELAR
+                    int opcionCancela;
+                    boolean opcionValidaCancela;
+                    do {
+                            System.out.println("Desea cancelar el alta de huesped?");
+                            System.out.println("1. SI");
+                            System.out.println("2. NO");
+                            System.out.print("Ingrese una opción: ");
+                            opcionCancela = sc.nextInt();
+                            opcionValidaCancela = true;
 
-                    switch (opcionCancela) {
-                        case 1: //SI
-                            System.out.println("Operación cancelada.");
-                            sc.close();
-                            return null;
+                            switch (opcionCancela) {
+                                case 1: //SI
+                                    System.out.println("Operación cancelada.");
+                                    sc.close();
+                                    return null;
 
-                        case 2: //NO
-                            sc.close(); 
-                            //No se que hace aca
+                                case 2: //NO
+                                    sc.close(); 
+                                    //No se que hace aca
 
-                        default:
-                            opcionValidaCancela = false;
-                            System.out.println("Opción no válida. Intente nuevamente.\n");
-                            sc.close();
-                            break;
-                    }
+                                default:
+                                    opcionValidaCancela = false;
+                                    System.out.println("Opción no válida. Intente nuevamente.\n");
+                                    sc.close();
+                                    break;
+                            }
 
-                } while (!opcionValidaCancela);
-            sc.close(); 
-            System.out.println("Operación cancelada.");
-            return null;
+                        } while (!opcionValidaCancela);
+                    sc.close(); 
+                    System.out.println("Operación cancelada.");
+                    return null;
 
-        default:
-            opcionValida = false;
-            System.out.println("Opción no válida. Intente nuevamente.\n");
-            sc.close();
-            break;
-    }
+                default:
+                    opcionValida = false;
+                    System.out.println("Opción no válida. Intente nuevamente.\n");
+                    sc.close();
+                    break;
+            }
 
-} while (!opcionValida);
+        } while (!opcionValida);
 
-reader.close();
+        reader.close();
 
-        // Guardar el nuevo pasajero en la base de dato s
-        // pasajeroImp.agregarPasajero(pasajero); lo comento porque no esta implementado
-        
-        System.out.println("Pasajero agregado exitosamente.");
+                // Guardar el nuevo pasajero en la base de dato s
+                // pasajeroImp.agregarPasajero(pasajero); lo comento porque no esta implementado
+                
+                System.out.println("Pasajero agregado exitosamente.");
 
-        return pasajero;
-    }
-}
+                return pasajero;
+            }
+        }
