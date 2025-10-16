@@ -7,26 +7,30 @@ public class Pasajero {
     private String apellido;
     private String nroDocumento;
     private String CUIT;
+    private String posIVA;
     private Date fechaDeNacimiento;
     private String email;
     private String telefono;
     private String ocupacion;
     private Direccion direccion;
     private TipoDocumento tipoDocumento;
+    private String nacionalidad;
 
 
     //constructor
-    public Pasajero(String nombres, String apellido, String nroDocumento, String CUIT, Date fechaDeNacimiento, String email, String telefono, String ocupacion, TipoDocumento tipoDocumento, Direccion direccion) {
+    public Pasajero(String nombres, String apellido, String nroDocumento, String CUIT, String posIVA, Date fechaDeNacimiento, String email, String telefono, String ocupacion, TipoDocumento tipoDocumento, Direccion direccion, String nacionalidad) {
         this.nombres = nombres;
         this.apellido = apellido;
         this.nroDocumento = nroDocumento;
         this.CUIT = CUIT;
+        this.posIVA = posIVA;
         this.fechaDeNacimiento = fechaDeNacimiento;
         this.email = email;
         this.telefono = telefono;
         this.ocupacion = ocupacion;
         this.direccion = direccion;
         this.tipoDocumento = tipoDocumento;
+        this.nacionalidad = nacionalidad; 
     }
 
     //getters y setters
@@ -53,6 +57,12 @@ public class Pasajero {
     }
     public void setCUIT(String CUIT) {
         this.CUIT = CUIT;
+    }
+    public String getPosIVA() {
+        return posIVA;
+    }
+    public void setPosIVA(String posIVA) {
+        this.posIVA = posIVA;
     }
     public Date getFechaDeNacimiento() {
         return fechaDeNacimiento;
@@ -89,6 +99,12 @@ public class Pasajero {
     }
     public void setDireccion(Direccion direccion) {
         this.direccion = direccion;
+    }
+    public String getNacionalidad() {
+        return nacionalidad;
+    }
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
     }
     
 

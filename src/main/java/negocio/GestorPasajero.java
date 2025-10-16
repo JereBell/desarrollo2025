@@ -7,6 +7,10 @@ import java.util.Scanner;
 
 import dao.daoImp.PasajeroImp;
 import dto.PasajeroDTO;
+import modelo.Direccion;
+import modelo.Ciudad;
+import modelo.Pais;
+import modelo.Provincia;
 
 
 public class GestorPasajero {
@@ -42,9 +46,61 @@ public class GestorPasajero {
         pasajero.setApellido(reader.readLine());
         ValidadorHuesped.validarApellido(pasajero.getApellido());
 
+        System.out.println("Ingrese el tipo de documento:");
+
         System.out.println("Ingrese el Número de documento del pasajero:");
         pasajero.setNroDocumento(reader.readLine());
         ValidadorHuesped.validarDni(pasajero.getNroDocumento());
+
+        System.out.println("Ingrese el CUIT:");
+        pasajero.setCUIT(reader.readLine());
+
+        System.out.println("Ingrese la posición del IVA:");
+        pasajero.setPosIVA(reader.readLine());
+
+        System.out.println("Ingrese su fecha de nacimiento (dd/mm/aaaa):");
+        pasajero.setFechaDeNacimiento(reader.readLine());
+
+        System.out.println("Ingrese su código postal:");
+        Integer codigoPostal = Integer.parseInt(reader.readLine());
+
+        System.out.println("Ingrese SU ciudad:");
+        String nombreCiudad = reader.readLine();
+
+        System.out.println("Ingrese su provincia:");
+        String nombreProvincia = reader.readLine();
+
+        System.out.println("Ingrese el ID de su provincia:");   
+        Integer idProvincia = Integer.parseInt(reader.readLine());
+
+        System.out.println("Ingrese el nombre de su país:");
+        String nombrePais = reader.readLine();
+
+        System.out.println("Ingrese el ID de su país:");
+        Integer idPais = Integer.parseInt(reader.readLine());
+
+        System.out.println("Ingrese el ID de su ciudad:");
+        Integer idCiudad = Integer.parseInt(reader.readLine());
+
+        Pais pais = new Pais(nombrePais, idPais);
+        Provincia provincia = new Provincia(idProvincia, nombreProvincia, pais);
+
+        Ciudad ciudad = new Ciudad(idCiudad, nombreCiudad, provincia);
+
+        System.out.println("Ingrese su calle:");
+        String calle = reader.readLine();
+
+        System.out.println("Ingrese su número de calle:");
+        Integer nroCalle = Integer.parseInt(reader.readLine());
+
+        System.out.println("Ingrese su piso:");
+        Integer piso = Integer.parseInt(reader.readLine());
+
+        System.out.println("Ingrese su número de departamento:");
+        Integer nroDpto = Integer.parseInt(reader.readLine());
+
+        Direccion direccion = new Direccion(codigoPostal, calle, nroCalle, piso, nroDpto, ciudad);
+        pasajero.setDireccion(direccion);
 
         System.out.println("Ingrese el teléfono del pasajero:");
         pasajero.setTelefono(reader.readLine());
@@ -54,7 +110,13 @@ public class GestorPasajero {
         pasajero.setEmail(reader.readLine());
         ValidadorHuesped.validarEmail(pasajero.getEmail());
 
-        // Guardar el nuevo pasajero en la base de datos
+        System.out.println("Ingrese su ocupación:");
+        pasajero.setOcupacion(reader.readLine());
+
+        System.out.println("Ingrese su nacionalidad:");
+        pasajero.setNacionalidad(reader.readLine());
+
+        // Guardar el nuevo pasajero en la base de dato s
         // pasajeroImp.agregarPasajero(pasajero); lo comento porque no esta implementado
         
         System.out.println("Pasajero agregado exitosamente.");

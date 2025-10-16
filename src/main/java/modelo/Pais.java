@@ -3,10 +3,10 @@ package modelo;
 public class Pais {
 
     private String nombre;
-    private String IDPais;
+    private Integer IDPais;
 
     //constructor
-    public Pais(String nombre, String IDPais) {
+    public Pais(String nombre, Integer IDPais) {
         this.nombre = nombre;
         this.IDPais = IDPais;
     }
@@ -17,10 +17,10 @@ public class Pais {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getIDPais() {
+    public Integer getIDPais() {
         return IDPais;
     }
-    public void setIDPais(String IDPais) {
+    public void setIDPais(Integer IDPais) {
         this.IDPais = IDPais;
     }
     
