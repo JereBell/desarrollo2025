@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import dao.PasajeroDAO;
@@ -13,40 +14,50 @@ public class PasajeroImp implements PasajeroDAO {
 
 
 
-    @Override
-    public PasajeroDTO buscarPasajeros(String nombre) {
-        try (InputStream is = PasajeroImp.class.getClassLoader().getResourceAsStream("pasajero.csv")) {
-            PasajeroDTO pasajero = new PasajeroDTO();
-            if (is == null) {
-                throw new IOException("No se encontró el archivo 'pasajero.csv' en resources.");
-            }
-                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-                 String linea;
-            linea = reader.readLine(); // Leer la primera línea (encabezados)
-            while ((linea = reader.readLine()) != null) {
-                String[] datos = linea.split(","); //obtengo un string por cada campo separado por coma
-                if (datos[1].equalsIgnoreCase(nombre)) { //si encaja el nombre
-                    pasajero.setApellido(datos[0]);
-                    pasajero.setNombres(datos[1]);
-                    pasajero.setNroDocumento(datos[2]);
-                    pasajero.setCUIT(datos[3]);
-                    pasajero.setFechaDeNacimiento(null);
-                    pasajero.setEmail(datos[5]);
-                    pasajero.setTelefono(datos[6]);
-                    pasajero.setOcupacion(datos[7]);
-                }
+        @Override
+        public List<PasajeroDTO> buscarPasajeros(PasajeroDTO buscado) {
 
-                // falta buscar por todos los otros campos y capaz deberia devolver una lista en campos que no sean unicos
+            List<PasajeroDTO> pasajeros = new ArrayList<>();
+            
+            try (InputStream is = PasajeroImp.class.getClassLoader().getResourceAsStream("pasajero.csv")) {
+                
+                if (is == null) {
+                    throw new IOException("No se encontró el archivo 'pasajero.csv' en resources.");
+                }
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                    String linea;
+                linea = reader.readLine(); // Leer la primera línea (encabezados)
+                while ((linea = reader.readLine()) != null) {
 
-                else{
-                    pasajero = null;
+                    PasajeroDTO pasajero = new PasajeroDTO();
+
+                    String[] datos = linea.split(","); //obtengo un string por cada campo separado por coma
+
+                        pasajero.setApellido(datos[0]);
+                        pasajero.setNombres(datos[1]);
+                        pasajero.setNroDocumento(datos[2]);
+                        pasajero.setCUIT(datos[3]);
+                        pasajero.setEmail(datos[5]);
+                        pasajero.setTelefono(datos[6]);
+                        pasajero.setOcupacion(datos[7]);
+
+                    if ((buscado.getNombres().isEmpty()) || buscado.getNombres().equalsIgnoreCase(pasajero.getNombres())) {
+                        if ((buscado.getApellido().isEmpty()) || buscado.getApellido().equalsIgnoreCase(pasajero.getApellido())) {
+                            if ((buscado.getTipoDocumentoString().isEmpty()) || buscado.getTipoDocumentoString().equalsIgnoreCase(pasajero.getTipoDocumentoString())) {
+                                if ((buscado.getNroDocumento().isEmpty()) || buscado.getNroDocumento().equalsIgnoreCase(pasajero.getNroDocumento())) {
+
+                                    pasajeros.add(pasajero);
+                                }
+                            }
+                        }
+                    }
                 }
             }
-            return pasajero;
-        } catch (IOException e) {
-            System.err.println("Error al leer el archivo: " + e.getMessage());
-        }
-        return null;
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return pasajeros;
     }
 
         @Override
