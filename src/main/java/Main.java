@@ -1,4 +1,6 @@
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import dto.PasajeroDTO;
@@ -16,7 +18,6 @@ public class Main {
       try {
          System.out.println("Ingrese un número de caso de uso a ejecutar:");
          Integer numero = scanner.nextInt();
-         PasajeroDTO pasajero = new PasajeroDTO();
 
          switch (numero) {
             case 1:
@@ -26,12 +27,16 @@ public class Main {
                break;
             case 2:
                System.out.println("Caso de uso 2 seleccionado.");
-               pasajero = gestorPasajero.buscarPasajero();
-               if(pasajero != null){
-                  System.out.println("Pasajero encontrado: " + pasajero.getNombres() + " " + pasajero.getApellido());
+               List<PasajeroDTO> pasajeros = new ArrayList<>();
+
+               pasajeros = gestorPasajero.buscarPasajero();
+               if(pasajeros != null && !pasajeros.isEmpty()){
+                  for(PasajeroDTO pasajero : pasajeros){
+                     System.out.println("Pasajero encontrado: " + pasajero.getNombres() + " " + pasajero.getApellido());
+                  }
                }
                else{
-                  System.out.println("Pasajero no encontrado.");
+                  System.out.println("No se encontraron pasajeros con esas caracteristicas.");
                }
 
                break;
@@ -46,7 +51,7 @@ public class Main {
                   //botones si y no
                //verificar que no exista el dni
                   //corregir
-               pasajero = gestorPasajero.agregarPasajero();
+               PasajeroDTO pasajero = gestorPasajero.agregarPasajero();
                break;
 
             default:
