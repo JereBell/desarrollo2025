@@ -43,7 +43,7 @@ public class Main {
             case 9:
                //ingresar los datos
                System.out.println("Caso de uso 9 seleccionado.");
-               pasajero = gestorPasajero.agregarPasajero();
+               gestorPasajero.agregarPasajero();
                Scanner sc = new Scanner(System.in);
                int opcion;
                boolean opcionValida;
