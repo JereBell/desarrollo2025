@@ -72,7 +72,7 @@ public class GestorPasajero {
         String tipoDoc = reader.readLine();
         ValidadorHuesped.validarTipoDocumento(tipoDoc);
 
-        TipoDocumentoDTO tipoDocumento = new TipoDocumentoDTO(idTipoDoc, tipoDoc);
+        TipoDocumento tipoDocumento = new TipoDocumento(idTipoDoc, tipoDoc);
         pasajero.setTipoDocumento(tipoDocumento);
 
         System.out.println("Ingrese el Número de documento del pasajero:");
