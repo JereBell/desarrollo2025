@@ -3,10 +3,12 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.Buffer;
+import java.util.List;
 import java.util.Scanner;
 
 import dao.daoImp.PasajeroImp;
 import dto.PasajeroDTO;
+import dto.TipoDocumentoDTO;
 import modelo.Direccion;
 import modelo.Ciudad;
 import modelo.Pais;
@@ -24,12 +26,27 @@ public class GestorPasajero {
 
 
     //metodos
-    public PasajeroDTO buscarPasajero() throws IOException {
+    public List<PasajeroDTO> buscarPasajero() throws IOException {
         Scanner scanner = new Scanner(System.in);
         try {
-            System.out.println("Ingrese el nombre del pasajero a buscar:");
+            System.out.println("Ingrese datos del pasajero a buscar (Puede dejar en blanco para omitir ese campo):");
+            System.out.println("Nombre:");
             String nombre = scanner.nextLine();
-            return pasajeroImp.buscarPasajeros(nombre);
+            System.out.println("Apellido:");
+            String apellido = scanner.nextLine();
+            System.out.println("Número de Documento:");
+            String nroDocumento = scanner.nextLine();
+            System.out.println("Tipo de Documento:");
+            String tipoDocumento = scanner.nextLine();
+          
+
+            PasajeroDTO buscado = new PasajeroDTO();
+            buscado.setNombres(nombre);
+            buscado.setApellido(apellido);
+            buscado.setNroDocumento(nroDocumento);
+            buscado.setTipoDocumentoString(tipoDocumento);
+
+            return pasajeroImp.buscarPasajeros(buscado);
         } finally {
             scanner.close();
         }
@@ -55,7 +72,7 @@ public class GestorPasajero {
         String tipoDoc = reader.readLine();
         ValidadorHuesped.validarTipoDocumento(tipoDoc);
 
-        TipoDocumento tipoDocumento = new TipoDocumento(idTipoDoc, tipoDoc);
+        TipoDocumentoDTO tipoDocumento = new TipoDocumentoDTO(idTipoDoc, tipoDoc);
         pasajero.setTipoDocumento(tipoDocumento);
 
         System.out.println("Ingrese el Número de documento del pasajero:");
@@ -143,7 +160,74 @@ public class GestorPasajero {
         ValidadorHuesped.validarNacionalidad(pasajero.getNacionalidad());
 
         
+        Scanner sc = new Scanner(System.in);
+        int opcion;
+        boolean opcionValida;
 
-        return pasajero;
-    }
-}
+        do {
+            System.out.println("1. CONTINUAR");
+            System.out.println("2. CANCELAR");
+            System.out.print("Ingrese una opción: ");
+            opcion = sc.nextInt();
+            opcionValida = true;
+
+            switch (opcion) {
+                case 1: //CONTINUAR
+
+
+
+                    sc.close();
+                    break;
+
+                case 2: //CANCELAR
+                    int opcionCancela;
+                    boolean opcionValidaCancela;
+                    do {
+                            System.out.println("Desea cancelar el alta de huesped?");
+                            System.out.println("1. SI");
+                            System.out.println("2. NO");
+                            System.out.print("Ingrese una opción: ");
+                            opcionCancela = sc.nextInt();
+                            opcionValidaCancela = true;
+
+                            switch (opcionCancela) {
+                                case 1: //SI
+                                    System.out.println("Operación cancelada.");
+                                    sc.close();
+                                    return null;
+
+                                case 2: //NO
+                                    sc.close(); 
+                                    //No se que hace aca
+
+                                default:
+                                    opcionValidaCancela = false;
+                                    System.out.println("Opción no válida. Intente nuevamente.\n");
+                                    sc.close();
+                                    break;
+                            }
+
+                        } while (!opcionValidaCancela);
+                    sc.close(); 
+                    System.out.println("Operación cancelada.");
+                    return null;
+
+                default:
+                    opcionValida = false;
+                    System.out.println("Opción no válida. Intente nuevamente.\n");
+                    sc.close();
+                    break;
+            }
+
+        } while (!opcionValida);
+
+        reader.close();
+
+                // Guardar el nuevo pasajero en la base de dato s
+                // pasajeroImp.agregarPasajero(pasajero); lo comento porque no esta implementado
+                
+                System.out.println("Pasajero agregado exitosamente.");
+
+                return pasajero;
+            }
+        }

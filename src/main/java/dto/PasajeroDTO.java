@@ -18,11 +18,12 @@ public class PasajeroDTO {
     private String telefono;
     private String ocupacion;
     private Direccion direccion;
-    private TipoDocumento tipoDocumento;
+    private TipoDocumentoDTO tipoDocumento;
+    private String tipoDocumentoString; //agregado para simplificar la busqueda en el gestor
     private String nacionalidad;
 
     //constructor
-    public PasajeroDTO(String nombres, String apellido, String nroDocumento, String CUIT, String posIVA, Date fechaDeNacimiento, String email, String telefono, String ocupacion, TipoDocumento tipoDocumento, Direccion direccion, String nacionalidad) {
+    public PasajeroDTO(String nombres, String apellido, String nroDocumento, String CUIT, String posIVA, Date fechaDeNacimiento, String email, String telefono, String ocupacion, TipoDocumentoDTO tipoDocumento, Direccion direccion, String nacionalidad) {
         this.nombres = nombres;
         this.apellido = apellido;
         this.nroDocumento = nroDocumento;
@@ -102,11 +103,17 @@ public class PasajeroDTO {
     public Direccion getDireccion() {
         return direccion;
     }
-    public TipoDocumento getTipoDocumento() {
+    public TipoDocumentoDTO getTipoDocumento() {
         return tipoDocumento;
     }
-    public void setTipoDocumento(TipoDocumento tipoDocumento) {
+    public void setTipoDocumento(TipoDocumentoDTO tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
+    }
+    public String getTipoDocumentoString() {
+        return tipoDocumentoString;
+    }
+    public void setTipoDocumentoString(String tipoDocumentoString) {
+        this.tipoDocumentoString = tipoDocumentoString;
     }
     public void setDireccion(Direccion direccion) {   
         this.direccion = direccion;

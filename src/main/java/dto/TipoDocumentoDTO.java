@@ -1,28 +1,24 @@
 package dto;
 
 public class TipoDocumentoDTO {
-
-    private String IDTipoDocumento;
     private String tipo;
+    private String id;
 
     //constructor
-    public TipoDocumentoDTO(String IDTipoDocumento, String tipo) {
-        this.IDTipoDocumento = IDTipoDocumento;
+    public TipoDocumentoDTO(String tipo, String id) {
         this.tipo = tipo;
+        this.id = id;
     }
+
+    public TipoDocumentoDTO() {
+        //TODO Auto-generated constructor stub
+    }
+
     //getters y setters
-    public String getIDTipoDocumento() {
-        return IDTipoDocumento;
-    }
-    public void setIDTipoDocumento(String IDTipoDocumento) {
-        this.IDTipoDocumento = IDTipoDocumento;
-    }
     public String getTipo() {
         return tipo;
     }
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-    
-
 }
