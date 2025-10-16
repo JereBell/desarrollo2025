@@ -39,9 +39,66 @@ public class Main {
                //ingresar los datos
                System.out.println("Caso de uso 9 seleccionado.");
                pasajero = gestorPasajero.agregarPasajero();
+               Scanner sc = new Scanner(System.in);
+               int opcion;
+               boolean opcionValida;
+
+               do {
+                  System.out.println("1. CONTINUAR");
+                  System.out.println("2. CANCELAR");
+                  System.out.print("Ingrese una opción: ");
+                  opcion = sc.nextInt();
+                  opcionValida = true;
+
+                  switch (opcion) {
+                     case 1: //CONTINUAR
+
+                     sc.close();
+                     break;
+
+                     case 2: //CANCELAR
+                           int opcionCancela;
+                           boolean opcionValidaCancela;
+                           do {
+                                 System.out.println("Desea cancelar el alta de huesped?");
+                                 System.out.println("1. SI");
+                                 System.out.println("2. NO");
+                                 System.out.print("Ingrese una opción: ");
+                                 opcionCancela = sc.nextInt();
+                                 opcionValidaCancela = true;
+
+                                 switch (opcionCancela) {
+                                       case 1: //SI
+                                          System.out.println("Operación cancelada.");
+                                          break;
+
+                                       case 2: //NO 
+                                          //No se que hace aca
+
+                                       default:
+                                          opcionValidaCancela = false;
+                                          System.out.println("Opción no válida. Intente nuevamente.\n");
+                                          break;
+                                 }
+                              } while (!opcionValidaCancela);
+                  sc.close();
+                  break;
+
+                  default:
+                     opcionValida = false;
+                     System.out.println("Opción no válida. Intente nuevamente.\n");
+                     break;
+                  }
+
+               } while (!opcionValida);
+
+               // Guardar el nuevo pasajero en la base de dato s
+               // pasajeroImp.agregarPasajero(pasajero); lo comento porque no esta implementado
+        
+               System.out.println("Pasajero agregado exitosamente.");
                break;
 
-            default:
+               default:
                System.out.println("Caso de uso no válido.");
                break;
          }
