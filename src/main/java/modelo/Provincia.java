@@ -3,11 +3,11 @@ package modelo;
 public class Provincia {
 
     private String nombre;
-    private String IDProvincia;
+    private Integer IDProvincia;
     private Pais pais;
 
     //constructor
-    public Provincia(String nombre, String IDProvincia, Pais pais) {
+    public Provincia(Integer IDProvincia, String nombre, Pais pais) {
         this.nombre = nombre;
         this.IDProvincia = IDProvincia;
         this.pais = pais;
@@ -19,10 +19,10 @@ public class Provincia {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getIDProvincia() {
+    public Integer getIDProvincia() {
         return IDProvincia;
     }
-    public void setIDProvincia(String IDProvincia) {
+    public void setIDProvincia(Integer IDProvincia) {
         this.IDProvincia = IDProvincia;
     }
     public Pais getPais() {
