@@ -1,6 +1,8 @@
 package dao.daoImp;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -67,14 +69,75 @@ public class PasajeroImp implements PasajeroDAO {
         }
     
         @Override
-        public void agregarPasajero(PasajeroDTO pasajero) {
-            // TODO Auto-generated method stub
-            // guarda en el csv todos los datos ingresados
-            throw new UnsupportedOperationException("Unimplemented method 'agregarPasajero'");
-        }
-
-
+        public boolean agregarPasajero(PasajeroDTO pasajero) {
+            // Lista de campos en el mismo orden que el encabezado del CSV
+            String[] campos = new String[] {
+                pasajero.getApellido(),
+                pasajero.getNombres(),
+                pasajero.getTipoDocumento(),
+                pasajero.getNroDocumento(),
+                pasajero.getCUIT(),
+                pasajero.getPosIVA(),
+                pasajero.getFechaDeNacimientoAsString(),
+                pasajero.getCalle(),       
+                pasajero.getNroCalleAsString(),
+                pasajero.getPisoAsString(),
+                pasajero.getNroDepartamentoAsString(),
+                pasajero.getCodigoPostalAsString(),
+                pasajero.getCiudad(),
+                pasajero.getProvincia(),
+                pasajero.getPais(),
+                pasajero.getTelefono(),
+                pasajero.getEmail(),
+                pasajero.getOcupacion(),
+                pasajero.getNacionalidad()
+        };
+        
+        String datos = transformarDatos(campos); // transforma en un string de todos los datos separados por coma
+        
+        return guardarEnArchivo(datos);
 
     }
+
+    // pequeño utilitario para escapar campos CSV
+    private String formatoCsv(String s) {
+        if (s == null) return "";
+        if (s.contains("\"")) {
+            s = s.replace("\"", "\"\"");
+        }
+        if (s.contains(",") || s.contains("\"") || s.contains("\n") || s.contains("\r")) {
+            return "\"" + s + "\"";
+        }
+        return s;
+        }
+    private String transformarDatos (String[] campos){
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < campos.length; i++) {
+                    sb.append(formatoCsv(campos[i]));
+                    sb.append(',');
+                }
+        sb.append(System.lineSeparator());
+
+        return sb.toString();
+    }
+
+    public boolean guardarEnArchivo (String datos){
+
+        String ruta = "src/main/resources/pasajero.csv";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
+            writer.write(datos);
+            writer.newLine(); // agrega salto de línea al final
+            return true;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+
+    }
+}
+
+
+
 
 

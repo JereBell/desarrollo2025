@@ -2,13 +2,15 @@ package dto;
 
 public class PaisDTO {
 
+    private static long siguienteID = 1;
     private String nombre;
-    private String IDPais;
+    private long IDPais;
 
     //constructor
-    public PaisDTO(String nombre, String IDPais) {
+    public PaisDTO(String nombre) {
         this.nombre = nombre;
-        this.IDPais = IDPais;
+        this.IDPais = siguienteID;
+        siguienteID++;
     }
     //getters y setters
     public String getNombre() {
@@ -17,12 +19,10 @@ public class PaisDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getIDPais() {
+    public long getIDPais() {
         return IDPais;
     }
-    public void setIDPais(String IDPais) {
-        this.IDPais = IDPais;
-    }
+   
     
 
 }

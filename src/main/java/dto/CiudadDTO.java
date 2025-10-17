@@ -3,13 +3,17 @@ package dto;
 
 public class CiudadDTO {
 
+    private static long siguienteID = 1;
     private String nombre;
-    private String IDCiudad;
+    private long IDCiudad;
+    private ProvinciaDTO provincia;
 
     //constructor
-    public CiudadDTO(String nombre, String IDCiudad) {
+    public CiudadDTO(String nombre, ProvinciaDTO provincia) {
         this.nombre = nombre;
-        this.IDCiudad = IDCiudad;
+        this.IDCiudad = siguienteID;
+        this.provincia = provincia;
+        siguienteID++;
     }
     //getters y setters
     public String getNombre() {
@@ -18,11 +22,11 @@ public class CiudadDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getIDCiudad() {
+    public long getIDCiudad() {
         return IDCiudad;
     }
-    public void setIDCiudad(String IDCiudad) {
-        this.IDCiudad = IDCiudad;
+    public ProvinciaDTO getProvincia() {
+        return provincia;
     }
     
 

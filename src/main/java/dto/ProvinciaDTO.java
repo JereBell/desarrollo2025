@@ -2,13 +2,17 @@ package dto;
 
 public class ProvinciaDTO {
 
+    private static long siguienteID = 1;
     private String nombre;
-    private String IDProvincia;
+    private long IDProvincia;
+    private PaisDTO pais;
 
     //constructor
-    public ProvinciaDTO(String nombre, String IDProvincia) {
+    public ProvinciaDTO(String nombre, PaisDTO pais) {
         this.nombre = nombre;
-        this.IDProvincia = IDProvincia;
+        this.IDProvincia = siguienteID;
+        this.pais = pais;
+        siguienteID++;
     }
     //getters y setters
     public String getNombre() {
@@ -17,11 +21,11 @@ public class ProvinciaDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public String getIDProvincia() {
+    public long getIDProvincia() {
         return IDProvincia;
     }
-    public void setIDProvincia(String IDProvincia) {
-        this.IDProvincia = IDProvincia;
+    public PaisDTO getPais() {
+        return pais;
     }
     
 
