@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import dao.daoImp.PasajeroImp;
 import dto.PasajeroDTO;
-import dto.TipoDocumentoDTO;
 import modelo.Direccion;
 import modelo.Ciudad;
 import modelo.Pais;
@@ -44,7 +43,7 @@ public class GestorPasajero {
             buscado.setNombres(nombre);
             buscado.setApellido(apellido);
             buscado.setNroDocumento(nroDocumento);
-            buscado.setTipoDocumentoString(tipoDocumento);
+            buscado.setTipoDocumento(tipoDocumento);
 
             return pasajeroImp.buscarPasajeros(buscado);
         } finally {
@@ -64,16 +63,12 @@ public class GestorPasajero {
         pasajero.setApellido(reader.readLine());
         ValidadorHuesped.validarApellido(pasajero.getApellido());
 
-        System.out.println("Ingrese el ID del tipo de documento:");
-        String idTipoDoc = reader.readLine();
-        ValidadorHuesped.validarIdTipoDocumento(idTipoDoc);
 
         System.out.println("Ingrese el tipo de documento:");
         String tipoDoc = reader.readLine();
         ValidadorHuesped.validarTipoDocumento(tipoDoc);
 
-        TipoDocumentoDTO tipoDocumento = new TipoDocumentoDTO(idTipoDoc, tipoDoc);
-        pasajero.setTipoDocumento(tipoDocumento);
+        pasajero.setTipoDocumento(tipoDoc);
 
         System.out.println("Ingrese el Número de documento del pasajero:");
         pasajero.setNroDocumento(reader.readLine());
@@ -95,7 +90,7 @@ public class GestorPasajero {
         Integer codigoPostal = Integer.parseInt(reader.readLine());
         ValidadorHuesped.validarCodigoPostal(codigoPostal);
 
-        System.out.println("Ingrese SU ciudad:");
+        System.out.println("Ingrese su ciudad:");
         String nombreCiudad = reader.readLine();
         ValidadorHuesped.validarCiudad(nombreCiudad);
 
@@ -103,26 +98,15 @@ public class GestorPasajero {
         String nombreProvincia = reader.readLine();
         ValidadorHuesped.validarProvincia(nombreProvincia);
 
-        System.out.println("Ingrese el ID de su provincia:");   
-        Integer idProvincia = Integer.parseInt(reader.readLine());
-        ValidadorHuesped.validarIdProvincia(idProvincia);
 
-        System.out.println("Ingrese el nombre de su país:");
+        System.out.println("Ingrese su país:");
         String nombrePais = reader.readLine();
         ValidadorHuesped.validarPais(nombrePais);
 
-        System.out.println("Ingrese el ID de su país:");
-        Integer idPais = Integer.parseInt(reader.readLine());
-        ValidadorHuesped.validarIdPais(idPais);
+        Pais pais = new Pais(nombrePais);
+        Provincia provincia = new Provincia(nombreProvincia, pais);
 
-        System.out.println("Ingrese el ID de su ciudad:");
-        Integer idCiudad = Integer.parseInt(reader.readLine());
-        ValidadorHuesped.validarIdCiudad(idCiudad);
-
-        Pais pais = new Pais(nombrePais, idPais);
-        Provincia provincia = new Provincia(idProvincia, nombreProvincia, pais);
-
-        Ciudad ciudad = new Ciudad(idCiudad, nombreCiudad, provincia);
+        Ciudad ciudad = new Ciudad(nombreCiudad, provincia);
 
         System.out.println("Ingrese su calle:");
         String calle = reader.readLine();
@@ -173,7 +157,7 @@ public class GestorPasajero {
             switch (opcion) {
                 case 1: //CONTINUAR
 
-
+                    pasajeroImp.agregarPasajero(pasajero);
 
                     sc.close();
                     break;

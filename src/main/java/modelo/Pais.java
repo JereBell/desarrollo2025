@@ -1,14 +1,15 @@
 package modelo;
 
 public class Pais {
-
+    private static long siguienteId = 1; // Variable estática para generar IDs únicos
     private String nombre;
-    private Integer IDPais;
+    private long IDPais;
 
     //constructor
-    public Pais(String nombre, Integer IDPais) {
+    public Pais(String nombre) {
         this.nombre = nombre;
-        this.IDPais = IDPais;
+        this.IDPais = siguienteId;
+        siguienteId++; // Incrementar el ID para el próximo país
     }
     //getters y setters
     public String getNombre() {
@@ -17,12 +18,11 @@ public class Pais {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Integer getIDPais() {
+    public long getIDPais() {
         return IDPais;
     }
-    public void setIDPais(Integer IDPais) {
-        this.IDPais = IDPais;
+    
     }
     
 
-}
+

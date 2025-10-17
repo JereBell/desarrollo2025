@@ -43,7 +43,7 @@ public class PasajeroImp implements PasajeroDAO {
 
                     if ((buscado.getNombres().isEmpty()) || buscado.getNombres().equalsIgnoreCase(pasajero.getNombres())) {
                         if ((buscado.getApellido().isEmpty()) || buscado.getApellido().equalsIgnoreCase(pasajero.getApellido())) {
-                            if ((buscado.getTipoDocumentoString().isEmpty()) || buscado.getTipoDocumentoString().equalsIgnoreCase(pasajero.getTipoDocumentoString())) {
+                            if ((buscado.getTipoDocumento().isEmpty()) || buscado.getTipoDocumento().equalsIgnoreCase(pasajero.getTipoDocumento())) {
                                 if ((buscado.getNroDocumento().isEmpty()) || buscado.getNroDocumento().equalsIgnoreCase(pasajero.getNroDocumento())) {
 
                                     pasajeros.add(pasajero);
