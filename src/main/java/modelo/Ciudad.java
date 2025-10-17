@@ -1,16 +1,17 @@
 package modelo;
 
 public class Ciudad {
-
+    private static long siguienteId = 1; // Variable estática para generar IDs únicos
     private String nombre;
-    private Integer IDCiudad;
+    private long IDCiudad;
     private Provincia provincia;
 
     //constructor
-    public Ciudad(Integer IDCiudad, String nombre, Provincia provincia) {
+    public Ciudad(String nombre, Provincia provincia) {
         this.nombre = nombre;
-        this.IDCiudad = IDCiudad;
+        this.IDCiudad = siguienteId;
         this.provincia = provincia;
+        siguienteId++; // Incrementar el ID para la próxima ciudad
     }
     //getters y setters
     public String getNombre() {
@@ -19,12 +20,10 @@ public class Ciudad {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public Integer getIDCiudad() {
+    public long getIDCiudad() {
         return IDCiudad;
     }
-    public void setIDCiudad(Integer IDCiudad) {
-        this.IDCiudad = IDCiudad;
-    }
+    
     public Provincia getProvincia() {
         return provincia;
     }
