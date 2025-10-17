@@ -7,14 +7,17 @@ public class DireccionDTO {
     private Integer nroCalle;
     private Integer piso;
     private Integer nroDepartamento;
+    private CiudadDTO ciudad;
 
     //constructor
-    public DireccionDTO(Integer codigoPostal, String calle, Integer nroCalle, Integer piso, Integer nroDepartamento) {
+    public DireccionDTO(Integer codigoPostal, String calle, Integer nroCalle, Integer piso, Integer nroDepartamento, CiudadDTO ciudad) {
         this.codigoPostal = codigoPostal;
         this.calle = calle;
         this.nroCalle = nroCalle;
         this.piso = piso;
         this.nroDepartamento = nroDepartamento;
+        this.ciudad = ciudad;
+
     }
     //getters y setters
     public Integer getCodigoPostal() {
@@ -46,6 +49,10 @@ public class DireccionDTO {
     }
     public void setNroDepartamento(Integer nroDepartamento) {
         this.nroDepartamento = nroDepartamento;
+    }
+
+    public CiudadDTO getCiudad() {
+        return ciudad;
     }
     
 

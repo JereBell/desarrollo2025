@@ -7,7 +7,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import dao.daoImp.PasajeroImp;
+import dto.CiudadDTO;
+import dto.DireccionDTO;
+import dto.PaisDTO;
 import dto.PasajeroDTO;
+import dto.ProvinciaDTO;
 import modelo.Direccion;
 import modelo.Ciudad;
 import modelo.Pais;
@@ -103,10 +107,10 @@ public class GestorPasajero {
         String nombrePais = reader.readLine();
         ValidadorHuesped.validarPais(nombrePais);
 
-        Pais pais = new Pais(nombrePais);
-        Provincia provincia = new Provincia(nombreProvincia, pais);
+        PaisDTO pais = new PaisDTO(nombrePais);
+        ProvinciaDTO provincia = new ProvinciaDTO(nombreProvincia, pais);
 
-        Ciudad ciudad = new Ciudad(nombreCiudad, provincia);
+        CiudadDTO ciudad = new CiudadDTO(nombreCiudad, provincia);
 
         System.out.println("Ingrese su calle:");
         String calle = reader.readLine();
@@ -124,7 +128,7 @@ public class GestorPasajero {
         Integer nroDpto = Integer.parseInt(reader.readLine());
         ValidadorHuesped.validarNroDpto(nroDpto);
 
-        Direccion direccion = new Direccion(codigoPostal, calle, nroCalle, piso, nroDpto, ciudad);
+        DireccionDTO direccion = new DireccionDTO(codigoPostal, calle, nroCalle, piso, nroDpto, ciudad);
         pasajero.setDireccion(direccion);
 
         System.out.println("Ingrese el teléfono del pasajero:");
@@ -156,7 +160,7 @@ public class GestorPasajero {
 
             switch (opcion) {
                 case 1: //CONTINUAR
-
+                    ValidadorHuesped.validar(pasajero);
                     pasajeroImp.agregarPasajero(pasajero);
 
                     sc.close();

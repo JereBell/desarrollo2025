@@ -17,12 +17,12 @@ public class PasajeroDTO {
     private String email;
     private String telefono;
     private String ocupacion;
-    private Direccion direccion;
+    private DireccionDTO direccion;
     private String tipoDocumento;
     private String nacionalidad;
 
     //constructor
-    public PasajeroDTO(String nombres, String apellido, String nroDocumento, String CUIT, String posIVA, Date fechaDeNacimiento, String email, String telefono, String ocupacion, String tipoDocumento, Direccion direccion, String nacionalidad) {
+    public PasajeroDTO(String nombres, String apellido, String nroDocumento, String CUIT, String posIVA, Date fechaDeNacimiento, String email, String telefono, String ocupacion, String tipoDocumento, DireccionDTO direccion, String nacionalidad) {
         this.nombres = nombres;
         this.apellido = apellido;
         this.nroDocumento = nroDocumento;
@@ -99,7 +99,7 @@ public class PasajeroDTO {
     public void setOcupacion(String ocupacion) {
         this.ocupacion = ocupacion;
     }
-    public Direccion getDireccion() {
+    public DireccionDTO getDireccion() {
         return direccion;
     }
     public String getTipoDocumento() {
@@ -109,7 +109,7 @@ public class PasajeroDTO {
         this.tipoDocumento = tipoDocumento;
     }
 
-    public void setDireccion(Direccion direccion) {   
+    public void setDireccion(DireccionDTO direccion) {
         this.direccion = direccion;
     }
     public String getNacionalidad() {
@@ -119,6 +119,75 @@ public class PasajeroDTO {
         this.nacionalidad = nacionalidad;
     }
 
+    public String getFechaDeNacimientoAsString() {
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate ld = fechaDeNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        return ld.format(f);
+    }
+    public String getCalle() {
+        return direccion.getCalle();
+    }
 
+    public String getNroCalleAsString() {
+        return (direccion.getNroCalle().toString());
+    }
+
+    public String getPisoAsString() {
+        return direccion.getPiso().toString();
+    }
+
+    public String getNroDepartamentoAsString() {
+        return direccion.getNroDepartamento().toString();
+    }
+    public String getCodigoPostalAsString() {
+        return direccion.getCodigoPostal().toString();
+    }
+    public Integer getNroCalle() {
+        return direccion.getNroCalle();
+    }
+    public Integer getPiso() {
+        return direccion.getPiso();
+    }
+    public Integer getNroDepartamento() {
+        return direccion.getNroDepartamento();
+    }
+    public Integer getCodigoPostal() {
+        return direccion.getCodigoPostal();
+    }
+    
+    public String getCiudad() {
+        return direccion.getCiudad().getNombre();
+    }
+    public String getProvincia() {
+        return direccion.getCiudad().getProvincia().getNombre();
+    }
+    public String getPais() {
+        return direccion.getCiudad().getProvincia().getPais().getNombre();
+    }
+
+    public void setCiudad(String ciudad) {
+        this.direccion.getCiudad().setNombre(ciudad);
+    }
+    public void setProvincia(String provincia) {
+        this.direccion.getCiudad().getProvincia().setNombre(provincia);
+    }
+    public void setPais(String pais) {
+        this.direccion.getCiudad().getProvincia().getPais().setNombre(pais);
+    }  
+    public void setCalle(String calle) {
+        this.direccion.setCalle(calle);
+    }
+    public void setNroCalle(Integer nroCalle) {
+        this.direccion.setNroCalle(nroCalle);
+    }
+    public void setPiso(Integer piso) {
+        this.direccion.setPiso(piso);
+    }
+    public void setNroDepartamento(Integer nroDepartamento) {
+        this.direccion.setNroDepartamento(nroDepartamento);
+    }
+    public void setCodigoPostal(Integer codigoPostal) {
+        this.direccion.setCodigoPostal(codigoPostal);
+    }
 
 }
