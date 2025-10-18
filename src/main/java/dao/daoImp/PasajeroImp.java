@@ -134,7 +134,10 @@ public class PasajeroImp implements PasajeroDAO {
             e.printStackTrace();
             return false;
         }
-
+    }
+    public boolean borrarPasajero(String nroDocumento) {
+        // Implementación pendiente
+        return false;
     }
 }
 

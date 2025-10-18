@@ -199,10 +199,30 @@ public class GestorPasajero {
             }
     public boolean modificarPasajero(PasajeroDTO pasajero) throws IOException {
         String documento = pasajero.getNroDocumento();
+        System.out.println("Seleccione una de las siguientes opciones:");
+        System.out.println("1. Siguiente (Modificar pasajero)");
+        System.out.println("2. Cancelar");
+        System.out.println("3. Borrar pasajero");
+        Scanner scanner = new Scanner(System.in);
+        int opcion = scanner.nextInt();
+        switch (opcion) {
+            case 1:
+                break;
+            case 2:
+                System.out.println("Modificación cancelada por el usuario.");
+                return false;
+            case 3:
+                if(pasajeroImp.borrarPasajero(documento)){
+                    System.out.println("Pasajero borrado con éxito.");
+                }
+                return true;
+            default:
+                System.out.println("Opción inválida. Modificación cancelada.");
+                return false;
+        }
         PasajeroDTO nuevo = new PasajeroDTO();
         System.out.println("Ingrese los nuevos datos del pasajero (deje en blanco para no modificar un campo):");
         String input = null;
-        Scanner scanner = new Scanner(System.in);
 
         nuevo.setNombres(cargarDatos("Nombres", pasajero.getNombres(), input, scanner));
         nuevo.setApellido(cargarDatos("Apellido", pasajero.getApellido(), input, scanner));
@@ -225,12 +245,12 @@ public class GestorPasajero {
         nuevo.setCodigoPostal(Integer.valueOf(cargarDatos("Código Postal", pasajero.getCodigoPostalAsString(), input, scanner)));
 
 
-
         pasajeroImp.modificarPasajero(documento, nuevo);
 
 
         return true;
     }
+    
     public String cargarDatos (String desc, String viejo, String input, Scanner scanner) {
         System.out.println(desc + " (" + viejo + "): -->");
         input = scanner.nextLine();
