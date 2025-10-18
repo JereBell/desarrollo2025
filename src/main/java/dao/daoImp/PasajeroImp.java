@@ -136,10 +136,46 @@ public class PasajeroImp implements PasajeroDAO {
         }
     }
     public boolean borrarPasajero(String nroDocumento) {
-        // Implementación pendiente
+
+        return borrarLinea(EncontrarLinea(nroDocumento));
+    }
+
+       
+    private int EncontrarLinea(String nroDocumento) {
+        int numeroLinea = 0;
+
+         try (InputStream is = PasajeroImp.class.getClassLoader().getResourceAsStream("pasajero.csv")) {
+                
+                if (is == null) {
+                    throw new IOException("No se encontró el archivo 'pasajero.csv' en resources.");
+                }
+                BufferedReader reader = new BufferedReader(new InputStreamReader(is));
+                String linea, datos[];
+
+                linea = reader.readLine(); // Leer la primera línea (encabezados)
+                while ((linea = reader.readLine()) != null) {
+                    numeroLinea++;
+                    datos = linea.split(",");
+                    if (datos[3].equals(nroDocumento)) {
+                    return numeroLinea;
+                    }
+                }
+            return -1;
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+            return -1;}
+        }
+
+        
+    private boolean borrarLinea(int numeroLinea) {
         return false;
     }
-}
+
+
+
+
+    }
 
 
 
