@@ -99,7 +99,6 @@ public class PasajeroImp implements PasajeroDAO {
 
     }
 
-    // pequeño utilitario para escapar campos CSV
     private String formatoCsv(String s) {
         if (s == null) return "";
         if (s.contains("\"")) {
@@ -110,11 +109,12 @@ public class PasajeroImp implements PasajeroDAO {
         }
         return s;
         }
+
     private String transformarDatos (String[] campos){
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < campos.length; i++) {
                     sb.append(formatoCsv(campos[i]));
-                    sb.append(',');
+                    if (i < campos.length - 1) sb.append(',');
                 }
         sb.append(System.lineSeparator());
 
@@ -126,8 +126,9 @@ public class PasajeroImp implements PasajeroDAO {
         String ruta = "src/main/resources/pasajero.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
+            writer.newLine();
             writer.write(datos);
-            writer.newLine(); // agrega salto de línea al final
+            writer.newLine();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
