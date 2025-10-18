@@ -7,7 +7,7 @@ import dto.PasajeroDTO;
 
 public interface PasajeroDAO {
 
-    public void modificarPasajero(PasajeroDTO pasajero);
+    public void modificarPasajero(String nroDocumento, PasajeroDTO pasajeroModificado);
     public List<PasajeroDTO> buscarPasajeros(PasajeroDTO buscado);
     public boolean agregarPasajero(PasajeroDTO pasajero);
    /* public PasajeroDTO buscarPasajero(String apellido);

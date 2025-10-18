@@ -198,7 +198,45 @@ public class GestorPasajero {
                 return pasajero;
             }
     public boolean modificarPasajero(PasajeroDTO pasajero) throws IOException {
+        String documento = pasajero.getNroDocumento();
+        PasajeroDTO nuevo = new PasajeroDTO();
+        System.out.println("Ingrese los nuevos datos del pasajero (deje en blanco para no modificar un campo):");
+        String input = null;
+        Scanner scanner = new Scanner(System.in);
+
+        nuevo.setNombres(cargarDatos("Nombres", pasajero.getNombres(), input, scanner));
+        nuevo.setApellido(cargarDatos("Apellido", pasajero.getApellido(), input, scanner));
+        nuevo.setTipoDocumento(cargarDatos("Tipo de Documento", pasajero.getTipoDocumento(), input, scanner));
+        nuevo.setNroDocumento(cargarDatos("Número de Documento", pasajero.getNroDocumento(), input, scanner));
+        nuevo.setPosIVA(cargarDatos("Posición IVA", pasajero.getPosIVA(), input, scanner));
+        nuevo.setCUIT(cargarDatos("CUIT", pasajero.getCUIT(), input, scanner));
+        nuevo.setEmail(cargarDatos("Email", pasajero.getEmail(), input, scanner));
+        nuevo.setTelefono(cargarDatos("Teléfono", pasajero.getTelefono(), input, scanner));
+        nuevo.setOcupacion(cargarDatos("Ocupación", pasajero.getOcupacion(), input, scanner));
+        nuevo.setNacionalidad(cargarDatos("Nacionalidad", pasajero.getNacionalidad(), input, scanner));
+        nuevo.setFechaDeNacimiento(cargarDatos("Fecha de nacimiento", documento, input, scanner));
+        nuevo.setPais(cargarDatos("Pais", pasajero.getPais(), input, scanner));
+        nuevo.setProvincia(cargarDatos("Provincia", pasajero.getProvincia(), input, scanner));
+        nuevo.setCiudad(cargarDatos("Ciudad", pasajero.getCiudad(), input, scanner));
+        nuevo.setNroCalle(Integer.valueOf(cargarDatos("Número de Calle", pasajero.getNroCalleAsString(), input, scanner)));
+        nuevo.setCalle(cargarDatos("Calle", "", input, scanner));
+        nuevo.setPiso(Integer.valueOf(cargarDatos("Piso", pasajero.getPisoAsString(), input, scanner)));
+        nuevo.setNroDepartamento(Integer.valueOf(cargarDatos("Número de Departamento", pasajero.getNroDepartamentoAsString(), input, scanner)));
+        nuevo.setCodigoPostal(Integer.valueOf(cargarDatos("Código Postal", pasajero.getCodigoPostalAsString(), input, scanner)));
+
+
+
+        pasajeroImp.modificarPasajero(documento, nuevo);
+
 
         return true;
     }
-}
+    public String cargarDatos (String desc, String viejo, String input, Scanner scanner) {
+        System.out.println(desc + " (" + viejo + "): -->");
+        input = scanner.nextLine();
+        if (!input.trim().isEmpty()) {
+            return viejo;
+        }
+        return input;
+        }
+    }

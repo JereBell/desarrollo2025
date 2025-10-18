@@ -63,9 +63,9 @@ public class PasajeroImp implements PasajeroDAO {
     }
 
         @Override
-        public void modificarPasajero(PasajeroDTO pasajero) {
-            // TODO Auto-generated method stub
-            throw new UnsupportedOperationException("Unimplemented method 'modificarPasajero'");
+        public void modificarPasajero(String documento, PasajeroDTO pasajeroModificado) {
+            // Implementación pendiente
+            
         }
     
         @Override
