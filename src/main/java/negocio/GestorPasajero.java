@@ -197,4 +197,8 @@ public class GestorPasajero {
 
                 return pasajero;
             }
-        }
+    public boolean modificarPasajero(PasajeroDTO pasajero) throws IOException {
+
+        return true;
+    }
+}
