@@ -12,11 +12,13 @@ public class ValidadorHuesped {
         boolean esValido = true;
         Scanner sc = new Scanner(System.in);
         do {
+            esValido = true;
             if (!validarNombre(huesped.getNombres())) {
                 esValido = false;
                 System.out.print("Ingrese un nombre válido: ");
                 String nombre = sc.nextLine();
                 huesped.setNombres(nombre);
+                
             }
             if (!validarApellido(huesped.getApellido())) {
                 esValido = false;
@@ -125,6 +127,7 @@ public class ValidadorHuesped {
 
         }while (!esValido);
         sc.close();
+        return;
     }
 
     // --- Validaciones individuales ---

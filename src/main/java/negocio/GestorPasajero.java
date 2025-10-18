@@ -61,51 +61,40 @@ public class GestorPasajero {
 
         System.out.println("Ingrese el nombre del pasajero:");
         pasajero.setNombres(reader.readLine());
-        ValidadorHuesped.validarNombre(pasajero.getNombres());
 
         System.out.println("Ingrese el apellido del pasajero:");
         pasajero.setApellido(reader.readLine());
-        ValidadorHuesped.validarApellido(pasajero.getApellido());
 
 
         System.out.println("Ingrese el tipo de documento:");
         String tipoDoc = reader.readLine();
-        ValidadorHuesped.validarTipoDocumento(tipoDoc);
 
         pasajero.setTipoDocumento(tipoDoc);
 
         System.out.println("Ingrese el Número de documento del pasajero:");
         pasajero.setNroDocumento(reader.readLine());
-        ValidadorHuesped.validarDni(pasajero.getNroDocumento());
 
         System.out.println("Ingrese el CUIT:");
         pasajero.setCUIT(reader.readLine());
-        ValidadorHuesped.validarCUIT(pasajero.getCUIT());
 
         System.out.println("Ingrese la posición del IVA:");
         pasajero.setPosIVA(reader.readLine());
-        ValidadorHuesped.validarPosIVA(pasajero.getPosIVA());
 
         System.out.println("Ingrese su fecha de nacimiento (dd/mm/aaaa):");
         pasajero.setFechaDeNacimiento(reader.readLine());
-        ValidadorHuesped.validarFechaDeNacimiento(pasajero.getFechaDeNacimiento());
 
         System.out.println("Ingrese su código postal:");
         Integer codigoPostal = Integer.parseInt(reader.readLine());
-        ValidadorHuesped.validarCodigoPostal(codigoPostal);
 
         System.out.println("Ingrese su ciudad:");
         String nombreCiudad = reader.readLine();
-        ValidadorHuesped.validarCiudad(nombreCiudad);
 
         System.out.println("Ingrese su provincia:");
         String nombreProvincia = reader.readLine();
-        ValidadorHuesped.validarProvincia(nombreProvincia);
 
 
         System.out.println("Ingrese su país:");
         String nombrePais = reader.readLine();
-        ValidadorHuesped.validarPais(nombrePais);
 
         PaisDTO pais = new PaisDTO(nombrePais);
         ProvinciaDTO provincia = new ProvinciaDTO(nombreProvincia, pais);
@@ -114,43 +103,34 @@ public class GestorPasajero {
 
         System.out.println("Ingrese su calle:");
         String calle = reader.readLine();
-        ValidadorHuesped.validarDomicilio(calle);
 
         System.out.println("Ingrese su número de calle:");
         Integer nroCalle = Integer.parseInt(reader.readLine());
-        ValidadorHuesped.validarNumeroCalle(nroCalle);
 
         System.out.println("Ingrese su piso:");
         Integer piso = Integer.parseInt(reader.readLine());
-        ValidadorHuesped.validarPiso(piso);
 
         System.out.println("Ingrese su número de departamento:");
         Integer nroDpto = Integer.parseInt(reader.readLine());
-        ValidadorHuesped.validarNroDpto(nroDpto);
 
         DireccionDTO direccion = new DireccionDTO(codigoPostal, calle, nroCalle, piso, nroDpto, ciudad);
         pasajero.setDireccion(direccion);
 
         System.out.println("Ingrese el teléfono del pasajero:");
         pasajero.setTelefono(reader.readLine());
-        ValidadorHuesped.validarTelefono(pasajero.getTelefono());
 
         System.out.println("Ingrese el correo electrónico del pasajero:");
         pasajero.setEmail(reader.readLine());
-        ValidadorHuesped.validarEmail(pasajero.getEmail());
 
         System.out.println("Ingrese su ocupación:");
         pasajero.setOcupacion(reader.readLine());
-        ValidadorHuesped.validarOcupacion(pasajero.getOcupacion());
 
         System.out.println("Ingrese su nacionalidad:");
         pasajero.setNacionalidad(reader.readLine());
-        ValidadorHuesped.validarNacionalidad(pasajero.getNacionalidad());
 
         Scanner sc = new Scanner(System.in);
         int opcion;
         boolean opcionValida;
-
         do {
             System.out.println("1. CONTINUAR");
             System.out.println("2. CANCELAR");
