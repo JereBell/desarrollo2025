@@ -1,4 +1,5 @@
 package negocio;
+import dao.PasajeroDAO;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,7 +15,9 @@ import dto.PasajeroDTO;
 import dto.ProvinciaDTO;
 import modelo.Direccion;
 import modelo.Ciudad;
+import modelo.Ocupacion;
 import modelo.Pais;
+import modelo.Pasajero;
 import modelo.Provincia;
 import modelo.TipoDocumento;
 
@@ -259,4 +262,33 @@ public class GestorPasajero {
         }
         return input;
         }
+    }
+    public boolean bajaDePasajero (Pasajero pasajero){
+        
+        Set<Pasajero> pasajerosTot = new HashSet<>(PasajeroDAO.obtenerTodos());
+        //obtiene todos los pasajeros del sistema
+        Set<Pasajero> pasajerosConEstadia = new HashSet<>();
+        //obtiene pasajeros con ocupacion
+        for (Ocupacion ocupacion : OcupacionDAO.obtenerTodas()) {  
+            if(ocupacion.getResponsble() != null){ //para asegurarme de no metern null al set
+                pasajerosConEstadia.add(ocupacion.getResponsble());
+            }
+            pasajerosConEstadia.addAll(ocupacion.getAcompaniantes());
+        }
+        
+        if(pasajerosConEstadia.contains(pasajero)){
+            System.out.println("El huesped no puede ser eliminado pues se ha alojado en el Hotel en alguna oportunidad.");
+            return false;
+        }
+        pasajerosTot.remove(pasajero); //actualizo el set local, de re onda
+        boolean eliminado = PasajeroDAO.borrarPasajero(pasajero.getNroDocumento());  //el error que tira es porque en PasajeroDAO el metodo borrarPasajero necesita un argumento de tipo PasajeroDTO
+        
+        if(eliminado){
+            System.out.println("Los datos del huesped " + pasajero.getNombres() + " " + pasajero.getApellido() + ", " 
+                    + pasajero.getTipoDocumento() + " " + pasajero.getNroDocumento() +" han sido eliminados del sistema.");
+        }else{
+            System.out.println("No se pudo eliminar el huesped.");
+        }
+        
+        return eliminado;
     }
