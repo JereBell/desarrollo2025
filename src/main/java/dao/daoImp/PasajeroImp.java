@@ -37,12 +37,11 @@ public class PasajeroImp implements PasajeroDAO {
 
                         pasajero.setApellido(datos[0]);
                         pasajero.setNombres(datos[1]);
-                        pasajero.setTipoDocumentoString(datos[2]);
-                        pasajero.setNroDocumento(datos[3]);
-                        pasajero.setCUIT(datos[4]);
-                        pasajero.setEmail(datos[16]);
-                        pasajero.setTelefono(datos[15]);
-                        pasajero.setOcupacion(datos[17]);
+                        pasajero.setNroDocumento(datos[2]);
+                        pasajero.setCUIT(datos[3]);
+                        pasajero.setEmail(datos[5]);
+                        pasajero.setTelefono(datos[6]);
+                        pasajero.setOcupacion(datos[7]);
 
                     if ((buscado.getNombres().isEmpty()) || buscado.getNombres().equalsIgnoreCase(pasajero.getNombres())) {
                         if ((buscado.getApellido().isEmpty()) || buscado.getApellido().equalsIgnoreCase(pasajero.getApellido())) {
@@ -177,8 +176,3 @@ public class PasajeroImp implements PasajeroDAO {
 
 
     }
-
-
-
-
-
