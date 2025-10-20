@@ -128,6 +128,7 @@ public class GestorPasajero {
         System.out.println("Ingrese su nacionalidad:");
         pasajero.setNacionalidad(reader.readLine());
 
+        
         Scanner sc = new Scanner(System.in);
         int opcion;
         boolean opcionValida;

@@ -82,7 +82,7 @@ public class Main {
                PasajeroDTO pasajero = gestorPasajero.agregarPasajero();
                break;
 
-            default:
+               default:
                System.out.println("Caso de uso no válido.");
                break;
          }
