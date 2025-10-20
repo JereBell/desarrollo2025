@@ -11,6 +11,8 @@ import java.util.List;
 
 import dao.PasajeroDAO;
 import dto.PasajeroDTO;
+import java.io.File;
+import java.nio.file.Files;
 
 public class PasajeroImp implements PasajeroDAO {
 
@@ -135,6 +137,7 @@ public class PasajeroImp implements PasajeroDAO {
             return false;
         }
     }
+    
     public boolean borrarPasajero(String nroDocumento) {
 
         return borrarLinea(EncontrarLinea(nroDocumento));
@@ -169,7 +172,18 @@ public class PasajeroImp implements PasajeroDAO {
 
         
     private boolean borrarLinea(int numeroLinea) {
-        return false;
+        if (numeroLinea < 0) {return false;}
+        File archivo = new File (getClass().getClassLoader().getResource("pasajero.cvs").getFile());
+        try{
+            List<String> lineas = Files.readAllLines(archivo.toPath());
+            if(numeroLinea >= lineas.size()) {return false;}
+            lineas.remove(numeroLinea); //elimina numeroLinea
+            Files.write(archivo.toPath(), lineas); //lo reescribo sin numeroLinea
+            return true;
+        } catch (IOException e){
+            e.printStackTrace();
+            return false;
+        }
     }
 
 
