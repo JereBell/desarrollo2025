@@ -4,12 +4,17 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.Buffer;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
+import dao.daoImp.OcupacionImp;
 import dao.daoImp.PasajeroImp;
 import dto.CiudadDTO;
 import dto.DireccionDTO;
+import dto.OcupacionDTO;
 import dto.PaisDTO;
 import dto.PasajeroDTO;
 import dto.ProvinciaDTO;
@@ -24,10 +29,12 @@ import modelo.TipoDocumento;
 
 public class GestorPasajero {
     private PasajeroImp pasajeroImp;
+    private OcupacionImp ocupacionImp;
 
 
     public GestorPasajero() {
         this.pasajeroImp = new PasajeroImp();
+        this.ocupacionImp = new OcupacionImp();
     }
 
 
@@ -262,16 +269,16 @@ public class GestorPasajero {
         }
         return input;
         }
-    }
+    
     public boolean bajaDePasajero (Pasajero pasajero){
-        
-        Set<Pasajero> pasajerosTot = new HashSet<>(PasajeroDAO.obtenerTodos());
+
+        Set<PasajeroDTO> pasajerosTot = new HashSet<PasajeroDTO>(pasajeroImp.buscarPasajeros(new PasajeroDTO()));
         //obtiene todos los pasajeros del sistema
-        Set<Pasajero> pasajerosConEstadia = new HashSet<>();
+        Set<PasajeroDTO> pasajerosConEstadia = new HashSet<>();
         //obtiene pasajeros con ocupacion
-        for (Ocupacion ocupacion : OcupacionDAO.obtenerTodas()) {  
+        for (OcupacionDTO ocupacion : ocupacionImp.buscarOcupaciones(new OcupacionDTO())) {  
             if(ocupacion.getResponsble() != null){ //para asegurarme de no metern null al set
-                pasajerosConEstadia.add(ocupacion.getResponsble());
+                pasajerosConEstadia.add((PasajeroDTO) ocupacion.getResponsble()); 
             }
             pasajerosConEstadia.addAll(ocupacion.getAcompaniantes());
         }
@@ -281,7 +288,7 @@ public class GestorPasajero {
             return false;
         }
         pasajerosTot.remove(pasajero); //actualizo el set local, de re onda
-        boolean eliminado = PasajeroDAO.borrarPasajero(pasajero.getNroDocumento());  //el error que tira es porque en PasajeroDAO el metodo borrarPasajero necesita un argumento de tipo PasajeroDTO
+        boolean eliminado = pasajeroImp.borrarPasajero(pasajero.getNroDocumento());  //el error que tira es porque en PasajeroDAO el metodo borrarPasajero necesita un argumento de tipo PasajeroDTO
         
         if(eliminado){
             System.out.println("Los datos del huesped " + pasajero.getNombres() + " " + pasajero.getApellido() + ", " 
@@ -292,3 +299,4 @@ public class GestorPasajero {
         
         return eliminado;
     }
+}
