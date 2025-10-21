@@ -9,7 +9,7 @@ public class Ocupacion {
     private Habitacion habitacion;
     private List<Servicio> servicios;
     private Pasajero responsble;
-    private List<Pasajero> acompañantes;
+    private List<Pasajero> acompaniantes;
 
     //constructor
     public Ocupacion(Date fechaIngreso, Date fechaEgreso, Habitacion habitacion, List<Servicio> servicios, Pasajero responsble) {
@@ -51,11 +51,9 @@ public class Ocupacion {
         this.responsble = responsble;
     }
     public List<Pasajero> getAcompañantes() {
-        return acompañantes;
+        return acompaniantes;
     }
     public void setAcompañantes(List<Pasajero> acompañantes) {
-        this.acompañantes = acompañantes;
+        this.acompaniantes = acompañantes;
     }
-    
-
 }
