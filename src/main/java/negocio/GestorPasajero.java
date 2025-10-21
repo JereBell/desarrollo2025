@@ -263,7 +263,7 @@ public class GestorPasajero {
         System.out.print(desc + " (" + viejo + "): -->");
         input = scanner.nextLine();
         System.out.println();
-        if (!input.trim().isEmpty()) {
+        if (input.trim().isEmpty()) {
             return viejo;
         }
         return input;
