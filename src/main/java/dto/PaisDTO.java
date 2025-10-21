@@ -12,6 +12,9 @@ public class PaisDTO {
         this.IDPais = siguienteID;
         siguienteID++;
     }
+    public PaisDTO() {
+        //TODO Auto-generated constructor stub
+    }
     //getters y setters
     public String getNombre() {
         return nombre;

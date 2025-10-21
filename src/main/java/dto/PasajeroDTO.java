@@ -13,7 +13,7 @@ public class PasajeroDTO {
     private String nroDocumento;
     private String CUIT;
     private String posIVA;
-    private Date fechaDeNacimiento;
+    private LocalDate fechaDeNacimiento;
     private String email;
     private String telefono;
     private String ocupacion;
@@ -22,7 +22,8 @@ public class PasajeroDTO {
     private String nacionalidad;
 
     //constructor
-    public PasajeroDTO(String nombres, String apellido, String nroDocumento, String CUIT, String posIVA, Date fechaDeNacimiento, String email, String telefono, String ocupacion, String tipoDocumento, DireccionDTO direccion, String nacionalidad) {
+    public PasajeroDTO(String nombres, String apellido, String nroDocumento, String CUIT, String posIVA, LocalDate fechaDeNacimiento, 
+            String email, String telefono, String ocupacion, String tipoDocumento, DireccionDTO direccion, String nacionalidad) {
         this.nombres = nombres;
         this.apellido = apellido;
         this.nroDocumento = nroDocumento;
@@ -38,7 +39,7 @@ public class PasajeroDTO {
     }
 
     public PasajeroDTO() {
-        //TODO Auto-generated constructor stub
+        this.direccion = new DireccionDTO();
     }
 
    
@@ -73,13 +74,14 @@ public class PasajeroDTO {
     public void setPosIVA(String posIVA) {
         this.posIVA = posIVA;
     }
-    public Date getFechaDeNacimiento() {
+    public LocalDate getFechaDeNacimiento() {
         return fechaDeNacimiento;
     }
     public void setFechaDeNacimiento(String fechaDeNacimiento) {
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            LocalDate ld = LocalDate.parse(fechaDeNacimiento, f);
-            this.fechaDeNacimiento = Date.from(ld.atStartOfDay(ZoneId.systemDefault()).toInstant());
+        if (fechaDeNacimiento != null && !fechaDeNacimiento.trim().isEmpty()) {
+            DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            this.fechaDeNacimiento = LocalDate.parse(fechaDeNacimiento, f);
+        }
     }
     public String getEmail() {
         return email;
@@ -120,27 +122,43 @@ public class PasajeroDTO {
     }
 
     public String getFechaDeNacimientoAsString() {
-        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        LocalDate ld = fechaDeNacimiento.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        return ld.format(f);
+        if (fechaDeNacimiento == null) {
+            return "";
+        }
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String texto = fechaDeNacimiento.format(f);
+
+        return texto;
     }
     public String getCalle() {
         return direccion.getCalle();
     }
 
     public String getNroCalleAsString() {
+        if (direccion.getNroCalle() == null) {
+            return "";
+        }
         return (direccion.getNroCalle().toString());
     }
 
     public String getPisoAsString() {
-        return direccion.getPiso().toString();
+        if (direccion.getPiso() == null) {
+            return "";
+        }
+        return (direccion.getPiso().toString());
     }
 
     public String getNroDepartamentoAsString() {
-        return direccion.getNroDepartamento().toString();
+        if (direccion.getNroDepartamento() == null) {
+            return "";
+        }
+        return (direccion.getNroDepartamento().toString());
     }
     public String getCodigoPostalAsString() {
-        return direccion.getCodigoPostal().toString();
+        if (direccion.getCodigoPostal() == null) {
+            return "";
+        }
+        return (direccion.getCodigoPostal().toString());
     }
     public Integer getNroCalle() {
         return direccion.getNroCalle();
@@ -180,11 +198,31 @@ public class PasajeroDTO {
     public void setNroCalle(Integer nroCalle) {
         this.direccion.setNroCalle(nroCalle);
     }
+    public void setNroCalle(String nroCalle) {
+        if (nroCalle != null && !nroCalle.trim().isEmpty()) {
+            this.direccion.setNroCalle(Integer.parseInt(nroCalle));
+        }
+    }
+    public void setPiso(String piso) {
+        if (piso != null && !piso.trim().isEmpty()) {
+            this.direccion.setPiso(Integer.parseInt(piso));
+        }
+    }
     public void setPiso(Integer piso) {
         this.direccion.setPiso(piso);
     }
     public void setNroDepartamento(Integer nroDepartamento) {
         this.direccion.setNroDepartamento(nroDepartamento);
+    }
+    public void setNroDepartamento(String nroDepartamento) {
+        if (nroDepartamento != null && !nroDepartamento.trim().isEmpty()) {
+            this.direccion.setNroDepartamento(Integer.parseInt(nroDepartamento));
+        }
+    }
+    public void setCodigoPostal(String codigoPostal) {
+        if (codigoPostal != null && !codigoPostal.trim().isEmpty()) {
+            this.direccion.setCodigoPostal(Integer.parseInt(codigoPostal));
+        }
     }
     public void setCodigoPostal(Integer codigoPostal) {
         this.direccion.setCodigoPostal(codigoPostal);

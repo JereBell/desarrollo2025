@@ -39,11 +39,23 @@ public class PasajeroImp implements PasajeroDAO {
 
                         pasajero.setApellido(datos[0]);
                         pasajero.setNombres(datos[1]);
-                        pasajero.setNroDocumento(datos[2]);
-                        pasajero.setCUIT(datos[3]);
-                        pasajero.setEmail(datos[5]);
-                        pasajero.setTelefono(datos[6]);
-                        pasajero.setOcupacion(datos[7]);
+                        pasajero.setTipoDocumento(datos[2]);
+                        pasajero.setNroDocumento(datos[3]);
+                        pasajero.setCUIT(datos[4]);
+                        pasajero.setPosIVA(datos[5]);
+                        pasajero.setFechaDeNacimiento(datos[6]);
+                        pasajero.setCalle(datos[7]);
+                        pasajero.setNroCalle(Integer.parseInt(datos[8]));
+                        pasajero.setPiso(Integer.parseInt(datos[9]));
+                        pasajero.setNroDepartamento(Integer.parseInt(datos[10]));
+                        pasajero.setCodigoPostal(Integer.parseInt(datos[11]));
+                        pasajero.setCiudad(datos[12]);
+                        pasajero.setProvincia(datos[13]);
+                        pasajero.setPais(datos[14]);
+                        pasajero.setTelefono(datos[15]);
+                        pasajero.setEmail(datos[16]);
+                        pasajero.setOcupacion(datos[17]);
+                        pasajero.setNacionalidad(datos[18]);
 
                     if ((buscado.getNombres().isEmpty()) || buscado.getNombres().equalsIgnoreCase(pasajero.getNombres())) {
                         if ((buscado.getApellido().isEmpty()) || buscado.getApellido().equalsIgnoreCase(pasajero.getApellido())) {
@@ -59,6 +71,7 @@ public class PasajeroImp implements PasajeroDAO {
             }
             catch (IOException e) {
                 e.printStackTrace();
+                System.out.println("Error al buscar pasajeros: " + e.getMessage());
             }
 
             return pasajeros;
@@ -66,10 +79,9 @@ public class PasajeroImp implements PasajeroDAO {
 
         @Override
         public void modificarPasajero(String documento, PasajeroDTO pasajeroModificado) {
-            // Implementación pendiente
-            
+            reemplazarLinea(EncontrarLinea(documento), pasajeroModificado);            
         }
-    
+
         @Override
         public boolean agregarPasajero(PasajeroDTO pasajero) {
             // Lista de campos en el mismo orden que el encabezado del CSV
@@ -173,7 +185,7 @@ public class PasajeroImp implements PasajeroDAO {
         
     private boolean borrarLinea(int numeroLinea) {
         if (numeroLinea < 0) {return false;}
-        File archivo = new File (getClass().getClassLoader().getResource("pasajero.cvs").getFile());
+        File archivo = new File (getClass().getClassLoader().getResource("pasajero.csv").getFile());
         try{
             List<String> lineas = Files.readAllLines(archivo.toPath());
             if(numeroLinea >= lineas.size()) {return false;}
@@ -186,10 +198,54 @@ public class PasajeroImp implements PasajeroDAO {
         }
     }
 
+    private void reemplazarLinea(int numeroLinea, PasajeroDTO pasajeroModificado) {
+        if (numeroLinea < 0) {
+            System.out.println("Pasajero no encontrado para modificar.");
+            return ;
+        }
+        File archivo = new File (getClass().getClassLoader().getResource("pasajero.csv").getFile());
+        try{
+            List<String> lineas = Files.readAllLines(archivo.toPath());
+            if(numeroLinea >= lineas.size()) {
+                System.out.println("Pasajero no encontrado para modificar.");
+                return ;
+            }
 
+            String[] campos = new String[] {
+                pasajeroModificado.getApellido(),
+                pasajeroModificado.getNombres(),
+                pasajeroModificado.getTipoDocumento(),
+                pasajeroModificado.getNroDocumento(),
+                pasajeroModificado.getCUIT(),
+                pasajeroModificado.getPosIVA(),
+                pasajeroModificado.getFechaDeNacimientoAsString(),
+                pasajeroModificado.getCalle(),       
+                pasajeroModificado.getNroCalleAsString(),
+                pasajeroModificado.getPisoAsString(),
+                pasajeroModificado.getNroDepartamentoAsString(),
+                pasajeroModificado.getCodigoPostalAsString(),
+                pasajeroModificado.getCiudad(),
+                pasajeroModificado.getProvincia(),
+                pasajeroModificado.getPais(),
+                pasajeroModificado.getTelefono(),
+                pasajeroModificado.getEmail(),
+                pasajeroModificado.getOcupacion(),
+                pasajeroModificado.getNacionalidad()
+        };
+        
+        String datos = transformarDatos(campos); // transforma en un string de todos los datos separados por coma
 
-
+            lineas.set(numeroLinea, datos.trim()); //reemplaza la linea
+            Files.write(archivo.toPath(), lineas); //lo reescribo con la linea reemplazada
+        } catch (IOException e){
+            e.printStackTrace();
     }
+    }
+}
+
+
+
+
 
 
 
