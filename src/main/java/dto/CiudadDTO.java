@@ -15,6 +15,9 @@ public class CiudadDTO {
         this.provincia = provincia;
         siguienteID++;
     }
+    public CiudadDTO() {
+        this.provincia = new ProvinciaDTO();
+    }
     //getters y setters
     public String getNombre() {
         return nombre;

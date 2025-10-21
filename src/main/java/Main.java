@@ -8,16 +8,16 @@ import negocio.GestorConserje;
 import negocio.GestorPasajero;
 
 public class Main {
+   private static Scanner sc = new Scanner(System.in);
    public static void main(String[] args) throws IOException {
       GestorConserje gestorConserje = new GestorConserje();
       GestorPasajero gestorPasajero = new GestorPasajero();
 
 
 
-      Scanner scanner = new Scanner(System.in);
       try {
-         System.out.println("Ingrese un número de caso de uso a ejecutar:");
-         Integer numero = scanner.nextInt();
+         System.out.print("Ingrese un número de caso de uso a ejecutar:");
+         Integer numero = ((Integer.parseInt(sc.nextLine())));
 
          switch (numero) {
             case 1:
@@ -29,7 +29,8 @@ public class Main {
                System.out.println("Caso de uso 2 seleccionado.");
                List<PasajeroDTO> pasajeros = new ArrayList<>();
 
-               pasajeros = gestorPasajero.buscarPasajero();
+               pasajeros = gestorPasajero.buscarPasajero(sc);
+
                if(pasajeros.size()>1){
                   System.out.println("Se encontraron " + pasajeros.size() + " pasajeros con esas caracteristicas.");
                   System.out.println();
@@ -39,16 +40,22 @@ public class Main {
                      i++;
                   }
                   System.out.println();
-                  System.out.println("Ingrese el numero de un pasajero para modificar, 0 para cancelar:");
-                  int seleccion = scanner.nextInt();
+                  System.out.print("Ingrese el numero de un pasajero para modificar, 0 para cancelar:");
 
-                  while(seleccion>pasajeros.size()||seleccion<0){
-                     System.out.println("Selección inválida. Por favor, ingrese un número acorde a la cantidad de pasajeros:");
-                     seleccion = scanner.nextInt();
-                  }
+
+                  Integer seleccion = null;
+                   // leer hasta que el usuario ingrese un entero válido
+                  while (seleccion == null) {
+                     seleccion= Integer.parseInt(sc.nextLine());
+
+                     if (seleccion.toString().isEmpty()) {
+                           System.out.println("Entrada inválida. Ingrese un número entero:");
+                           continue;
+                       }
+                   }
                   if(seleccion!=0){
                      PasajeroDTO pasajeroSeleccionado = pasajeros.get(seleccion-1);
-                     if(gestorPasajero.modificarPasajero(pasajeroSeleccionado)){
+                     if(gestorPasajero.modificarPasajero(pasajeroSeleccionado, sc)){
                         System.out.println("Modificación realizada con éxito.");
                      }
                   }else{
@@ -59,13 +66,13 @@ public class Main {
                   System.out.println(". " + pasajero.getNombres() + " " + pasajero.getApellido()+" - " + pasajero.getTipoDocumento() + ": " + pasajero.getNroDocumento());
                   System.out.println();
                   System.out.println("Ingrese 1 para modificar este pasajero, 0 para cancelar:");
-                  int seleccion = scanner.nextInt();
+                  Integer seleccion = sc.nextInt();
                   while(seleccion<0||seleccion>1){
                      System.out.println("Selección inválida. Ingrese 1 para modificar, 0 para cancelar:");
-                     seleccion = scanner.nextInt();
+                     seleccion = sc.nextInt();
                   }
                   if(seleccion==1){
-                     if(gestorPasajero.modificarPasajero(pasajero)){
+                     if(gestorPasajero.modificarPasajero(pasajero, sc)){
                         System.out.println("Modificación realizada con éxito.");
                      }
                   }else{
@@ -87,7 +94,7 @@ public class Main {
                break;
          }
       } finally {
-         scanner.close();
+         sc.close();
       }
    }
 
