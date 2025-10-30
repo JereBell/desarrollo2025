@@ -19,6 +19,9 @@ public class DireccionDTO {
         this.ciudad = ciudad;
 
     }
+    public DireccionDTO() {
+        this.ciudad = new CiudadDTO();
+    }
     //getters y setters
     public Integer getCodigoPostal() {
         return codigoPostal;

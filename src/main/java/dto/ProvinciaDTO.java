@@ -14,6 +14,9 @@ public class ProvinciaDTO {
         this.pais = pais;
         siguienteID++;
     }
+    public ProvinciaDTO() {
+        this.pais = new PaisDTO();
+    }
     //getters y setters
     public String getNombre() {
         return nombre;
