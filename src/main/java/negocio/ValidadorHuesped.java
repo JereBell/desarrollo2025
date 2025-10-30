@@ -3,12 +3,13 @@ package negocio;
 import dto.PasajeroDTO;
 import java.util.Date;
 import java.util.Scanner;
+import exceptions.HuespedInvalidoException;
 
 public class ValidadorHuesped {
 
     // Valida un DTO completo
-    public static void validar(PasajeroDTO huesped) throws IllegalArgumentException {
-        if (huesped == null) throw new IllegalArgumentException("El huésped no puede ser nulo.");
+    public static void validar(PasajeroDTO huesped) throws HuespedInvalidoException {
+        if (huesped == null) throw new HuespedInvalidoException("El huésped no puede ser nulo.");
         boolean esValido = true;
         Scanner sc = new Scanner(System.in);
         do {

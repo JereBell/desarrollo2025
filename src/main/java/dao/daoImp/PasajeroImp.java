@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
-
+import exceptions.ArchivoNoEncontradoException;
 import dao.PasajeroDAO;
 import dto.PasajeroDTO;
 import java.io.File;
@@ -26,7 +26,7 @@ public class PasajeroImp implements PasajeroDAO {
             try (InputStream is = PasajeroImp.class.getClassLoader().getResourceAsStream("pasajero.csv")) {
                 
                 if (is == null) {
-                    throw new IOException("No se encontró el archivo 'pasajero.csv' en resources.");
+                    throw new ArchivoNoEncontradoException("No se encontró el archivo 'pasajero.csv' en resources.");
                 }
                     BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                     String linea;
@@ -56,25 +56,23 @@ public class PasajeroImp implements PasajeroDAO {
                         pasajero.setEmail(datos[16]);
                         pasajero.setOcupacion(datos[17]);
                         pasajero.setNacionalidad(datos[18]);
-
-                    if ((buscado.getNombres().isEmpty()) || buscado.getNombres().equalsIgnoreCase(pasajero.getNombres())) {
-                        if ((buscado.getApellido().isEmpty()) || buscado.getApellido().equalsIgnoreCase(pasajero.getApellido())) {
-                            if ((buscado.getTipoDocumento().isEmpty()) || buscado.getTipoDocumento().equalsIgnoreCase(pasajero.getTipoDocumento())) {
-                                if ((buscado.getNroDocumento().isEmpty()) || buscado.getNroDocumento().equalsIgnoreCase(pasajero.getNroDocumento())) {
-
-                                    pasajeros.add(pasajero);
-                                }
-                            }
-                        }
-                    }
+                        
+                        pasajeros.add(pasajero);
                 }
+            } catch (ArchivoNoEncontradoException e){
+                System.out.println("Error: " + e.getMessage());
             }
             catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("Error al buscar pasajeros: " + e.getMessage());
             }
-
-            return pasajeros;
+            
+            return pasajeros.stream()
+                    .filter(p -> buscado.getNombres().isEmpty() || p.getNombres().equalsIgnoreCase(buscado.getNombres()))
+                    .filter(p -> buscado.getApellido().isEmpty() || p.getApellido().equalsIgnoreCase(buscado.getApellido()))
+                    .filter(p -> buscado.getTipoDocumento().isEmpty() || p.getTipoDocumento().equalsIgnoreCase(buscado.getTipoDocumento()))
+                    .filter(p -> buscado.getNroDocumento().isEmpty() || p.getNroDocumento().equalsIgnoreCase(buscado.getNroDocumento()))
+                    .toList();
     }
 
         @Override
@@ -152,8 +150,7 @@ public class PasajeroImp implements PasajeroDAO {
     
     public boolean borrarPasajero(String nroDocumento) {
 
-        return borrarLinea(EncontrarLinea(nroDocumento));
-    }
+        return borrarLinea(EncontrarLinea(nroDocumento));}
 
        
     private int EncontrarLinea(String nroDocumento) {
@@ -162,7 +159,7 @@ public class PasajeroImp implements PasajeroDAO {
          try (InputStream is = PasajeroImp.class.getClassLoader().getResourceAsStream("pasajero.csv")) {
                 
                 if (is == null) {
-                    throw new IOException("No se encontró el archivo 'pasajero.csv' en resources.");
+                    throw new ArchivoNoEncontradoException("No se encontró el archivo 'pasajero.csv' en resources.");
                 }
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                 String linea, datos[];
@@ -175,6 +172,9 @@ public class PasajeroImp implements PasajeroDAO {
                     return numeroLinea;
                     }
                 }
+            return -1;
+        } catch (ArchivoNoEncontradoException e){
+            System.out.println("Error: " + e.getMessage());
             return -1;
         }
         catch (IOException e) {

@@ -8,6 +8,7 @@ import java.io.IOException;
 import dao.ConserjeDAO;
 import modelo.Conserje;
 import dto.ConserjeDTO;
+import exceptions.ArchivoNoEncontradoException;
 
 public class ConserjeImp implements ConserjeDAO {
 
@@ -22,7 +23,7 @@ public class ConserjeImp implements ConserjeDAO {
         try (InputStream is = ConserjeImp.class.getClassLoader().getResourceAsStream("conserje.csv")) {
 
             if (is == null) {
-                throw new IOException("No se encontró el archivo 'conserje.csv' en resources.");
+                throw new ArchivoNoEncontradoException("No se encontró el archivo 'conserje.csv' en resources.");
             }
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                 String linea;
@@ -35,7 +36,10 @@ public class ConserjeImp implements ConserjeDAO {
                             return true;
                         }
                 }
-            } catch (IOException e) {
+            } catch (ArchivoNoEncontradoException e){
+                System.out.println("Error: " + e.getMessage());
+            }
+            catch (IOException e) {
                 System.err.println("Error al leer el archivo: " + e.getMessage());
             }
         return false;

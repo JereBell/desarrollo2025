@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-
+import exceptions.HuespedInvalidoException;
 import dao.daoImp.OcupacionImp;
 import dao.daoImp.PasajeroImp;
 import dto.CiudadDTO;
@@ -64,7 +64,7 @@ public class GestorPasajero {
         }
     }
 
-    public PasajeroDTO agregarPasajero() throws IOException {
+    public PasajeroDTO agregarPasajero() throws IOException, HuespedInvalidoException {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         PasajeroDTO pasajero = new PasajeroDTO();
 
@@ -285,32 +285,38 @@ public class GestorPasajero {
         }
     
     public boolean bajaDePasajero (Pasajero pasajero){
+        
+        Scanner sc = new Scanner(System.in);
+        
+        System.out.println("Los datos del huesped " + pasajero.getNombres() + " "
+                + pasajero.getApellido() + ", " + pasajero.getTipoDocumento() + " "
+                + pasajero.getNroDocumento() + " seran eliminados del sistema");
+        System.out.println("Desea continuar?");
+        System.out.println("1. ELIMINAR");
+        System.out.println("2. CANCELAR");
+        System.out.println("Ingrese una opcion: ");
 
-        Set<PasajeroDTO> pasajerosTot = new HashSet<PasajeroDTO>(pasajeroImp.buscarPasajeros(new PasajeroDTO()));
-        //obtiene todos los pasajeros del sistema
-        Set<PasajeroDTO> pasajerosConEstadia = new HashSet<>();
-        //obtiene pasajeros con ocupacion
-        for (OcupacionDTO ocupacion : ocupacionImp.buscarOcupaciones(new OcupacionDTO())) {  
-            if(ocupacion.getResponsble() != null){ //para asegurarme de no metern null al set
-                pasajerosConEstadia.add((PasajeroDTO) ocupacion.getResponsble()); 
-            }
-            pasajerosConEstadia.addAll(ocupacion.getAcompaniantes());
-        }
+        String opcion = sc.nextLine();
         
-        if(pasajerosConEstadia.contains(pasajero)){
-            System.out.println("El huesped no puede ser eliminado pues se ha alojado en el Hotel en alguna oportunidad.");
-            return false;
-        }
-        pasajerosTot.remove(pasajero); //actualizo el set local, de re onda
-        boolean eliminado = pasajeroImp.borrarPasajero(pasajero.getNroDocumento());  //el error que tira es porque en PasajeroDAO el metodo borrarPasajero necesita un argumento de tipo PasajeroDTO
+        if(opcion.equals("1")){
         
-        if(eliminado){
-            System.out.println("Los datos del huesped " + pasajero.getNombres() + " " + pasajero.getApellido() + ", " 
-                    + pasajero.getTipoDocumento() + " " + pasajero.getNroDocumento() +" han sido eliminados del sistema.");
-        }else{
-            System.out.println("No se pudo eliminar el huesped.");
-        }
+            boolean eliminado = pasajeroImp.borrarPasajero(pasajero.getNroDocumento());
+
+            if(eliminado){
+                System.out.println("Los datos del huesped " + pasajero.getNombres() + " "
+                        + pasajero.getApellido() + ", " + pasajero.getTipoDocumento() + " "
+                        + pasajero.getNroDocumento() + " han sido eliminados del sistema");
+                System.out.println("PRESIONE CUALQUIER TECLA PARA CONTINUAR...");
+                sc.nextLine();
+            } else {
+                System.out.println("No se pudo eliminar al huesped del sistema");
+                System.out.println("PRESIONE CUALQUIER TECLA PARA CONTINUAR...");
+                sc.nextLine(); }
+            return eliminado;
         
-        return eliminado;
+        } else {
+            System.out.println("Operacion cancelada");
+            return false;}
     }
+    
 }
