@@ -28,7 +28,7 @@ public class Main {
          List<Integer> opciones = new ArrayList<>(Arrays.asList(1, 2, 9));
          
          while(seleccion == null){
-            System.out.print("->");
+            System.out.print("--> ");
 
             entrada=sc.nextLine();
             System.out.println();
