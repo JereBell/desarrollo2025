@@ -75,11 +75,8 @@ public class GestorPasajero {
         System.out.println("Ingrese el apellido del pasajero:");
         pasajero.setApellido(reader.readLine());
 
-
         System.out.println("Ingrese el tipo de documento:");
-        String tipoDoc = reader.readLine();
-
-        pasajero.setTipoDocumento(tipoDoc);
+        pasajero.setTipoDocumento(reader.readLine());
 
         System.out.println("Ingrese el Número de documento del pasajero:");
         pasajero.setNroDocumento(reader.readLine());
