@@ -8,6 +8,7 @@ import java.util.Scanner;
 import dto.PasajeroDTO;
 import negocio.GestorConserje;
 import negocio.GestorPasajero;
+import exceptions.HuespedInvalidoException;
 
 public class Main {
    private static Scanner sc = new Scanner(System.in);
@@ -126,7 +127,10 @@ public class Main {
                System.out.println("Caso de uso no válido.");
                break;
          }
-      } finally {
+      } catch (HuespedInvalidoException e){
+          System.out.println("Error: " + e.getMessage());
+      }
+        finally {
          sc.close();
       }
    }
