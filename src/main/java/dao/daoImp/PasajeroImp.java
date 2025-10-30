@@ -139,12 +139,11 @@ public class PasajeroImp implements PasajeroDAO {
 
     public boolean guardarEnArchivo (String datos){
 
-        String ruta = "src/data/pasajero.csv";
+        String ruta = "data/pasajero.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
             writer.newLine();
             writer.write(datos);
-            writer.newLine();
             return true;
         } catch (IOException e) {
             e.printStackTrace();
