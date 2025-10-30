@@ -67,16 +67,26 @@ public class Main {
 
 
                   seleccion = null;
-                   // leer hasta que el usuario ingrese un entero válido
+
+                  // leer hasta que el usuario ingrese un entero válido
                   while (seleccion == null) {
-                     entrada= sc.nextLine();
-                     
-                     if (entrada.isEmpty()||Integer.valueOf(entrada)<0||Integer.valueOf(entrada)>pasajeros.size()) {
-                           System.out.println("Entrada inválida. Ingrese un número entero:");
-                       }else {
-                           seleccion = Integer.valueOf(entrada);
-                       }
-                   }
+                     entrada = sc.nextLine();
+
+                     try {
+                        int valor = Integer.parseInt(entrada);
+
+                        if (valor < 0 || valor > pasajeros.size()) {
+                              System.out.println("Número fuera de rango. Ingrese un número válido:");
+                        } else {
+                              seleccion = valor;
+                        }
+
+                     } catch (NumberFormatException e) {
+                        // Si el usuario ingresó texto o algo no numérico
+                        System.out.println("Entrada inválida. Ingrese un número entero:");
+                     }
+                  }
+
 
                   if(seleccion!=0){
                      PasajeroDTO pasajeroSeleccionado = pasajeros.get(seleccion-1);
@@ -93,18 +103,26 @@ public class Main {
                   System.out.println("Ingrese 1 para modificar este pasajero, 0 para cancelar:");
 
                   seleccion = null;
-                   // leer hasta que el usuario ingrese un entero válido
-                  while (seleccion == null) {
-                     entrada= sc.nextLine();
-                     
-                     if (entrada.isEmpty()||Integer.valueOf(entrada)<0||Integer.valueOf(entrada)>1) {
-                           System.out.println("Entrada inválida. Ingrese un número entero: ");
-                       }else {
-                           seleccion = Integer.valueOf(entrada);
 
-                       }
-                       System.out.println();
-                   }
+                  // leer hasta que el usuario ingrese un entero válido
+                  while (seleccion == null) {
+                     entrada = sc.nextLine();
+
+                     try {
+                        int valor = Integer.parseInt(entrada);
+
+                        if (valor < 0 || valor > pasajeros.size()) {
+                              System.out.println("Número fuera de rango. Ingrese un número válido:");
+                        } else {
+                              seleccion = valor;
+                        }
+
+                     } catch (NumberFormatException e) {
+                        // Si el usuario ingresó texto o algo no numérico
+                        System.out.println("Entrada inválida. Ingrese un número entero:");
+                     }
+                  }
+
                   if(seleccion==1){
                      if(gestorPasajero.modificarPasajero(pasajero, sc)){
                         System.out.println("Modificación realizada con éxito.");

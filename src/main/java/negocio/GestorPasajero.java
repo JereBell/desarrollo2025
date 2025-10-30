@@ -212,8 +212,8 @@ public class GestorPasajero {
         String documento = pasajero.getNroDocumento();
         System.out.println("Seleccione una de las siguientes opciones:");
         System.out.println("1. Siguiente (Modificar pasajero)");
-        System.out.println("2. Cancelar");
-        System.out.println("3. Borrar pasajero");
+        System.out.println("2. Borrar pasajero");
+        System.out.println("3. Cancelar");
         System.out.println("------------------------------");
         
         String entrada;
@@ -223,7 +223,7 @@ public class GestorPasajero {
             entrada= sc.nextLine();
                      
             if (entrada.isEmpty()||Integer.valueOf(entrada)<0||Integer.valueOf(entrada)>3) {
-                System.out.println("Entrada inválida:  1-Modificar.   2-Cancelar.   3-Borrar pasajero");
+                System.out.println("Entrada inválida:\n"+ "1-Modificar.\n"+"2-Borrar pasajero.\n"+"3-Cancelar.\n");
             }else {
                 opcion = Integer.valueOf(entrada);
             }
@@ -231,10 +231,10 @@ public class GestorPasajero {
         switch (opcion) {
             case 1:
                 break;
-            case 2:
+            case 3:
                 System.out.println("Modificación cancelada por el usuario.");
                 return false;
-            case 3:
+            case 2:
                 if(pasajeroImp.borrarPasajero(documento)){
                     System.out.println("Pasajero borrado con éxito.");
                 }

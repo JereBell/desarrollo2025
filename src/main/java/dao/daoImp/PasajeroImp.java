@@ -13,6 +13,10 @@ import dao.PasajeroDAO;
 import dto.PasajeroDTO;
 import java.io.File;
 import java.nio.file.Files;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.io.IOException;
+
 
 public class PasajeroImp implements PasajeroDAO {
 
@@ -23,10 +27,10 @@ public class PasajeroImp implements PasajeroDAO {
 
             List<PasajeroDTO> pasajeros = new ArrayList<>();
             
-            try (InputStream is = PasajeroImp.class.getClassLoader().getResourceAsStream("pasajero.csv")) {
+            try (InputStream is = new FileInputStream("data/pasajero.csv")) {
                 
                 if (is == null) {
-                    throw new ArchivoNoEncontradoException("No se encontró el archivo 'pasajero.csv' en resources.");
+                    throw new ArchivoNoEncontradoException("No se encontró el archivo 'pasajero.csv' en data.");
                 }
                     BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                     String linea;
@@ -135,7 +139,7 @@ public class PasajeroImp implements PasajeroDAO {
 
     public boolean guardarEnArchivo (String datos){
 
-        String ruta = "src/main/resources/pasajero.csv";
+        String ruta = "src/data/pasajero.csv";
 
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(ruta, true))) {
             writer.newLine();
@@ -150,16 +154,18 @@ public class PasajeroImp implements PasajeroDAO {
     
     public boolean borrarPasajero(String nroDocumento) {
 
-        return borrarLinea(EncontrarLinea(nroDocumento));}
+        return borrarLinea(EncontrarLinea(nroDocumento));
+    
+    }
 
        
     private int EncontrarLinea(String nroDocumento) {
         int numeroLinea = 0;
 
-         try (InputStream is = PasajeroImp.class.getClassLoader().getResourceAsStream("pasajero.csv")) {
+         try (InputStream is = new FileInputStream("data/pasajero.csv")) {
                 
                 if (is == null) {
-                    throw new ArchivoNoEncontradoException("No se encontró el archivo 'pasajero.csv' en resources.");
+                    throw new ArchivoNoEncontradoException("No se encontró el archivo 'pasajero.csv' en data.");
                 }
                 BufferedReader reader = new BufferedReader(new InputStreamReader(is));
                 String linea, datos[];
@@ -185,10 +191,14 @@ public class PasajeroImp implements PasajeroDAO {
         
     private boolean borrarLinea(int numeroLinea) {
         if (numeroLinea < 0) {return false;}
-        File archivo = new File (getClass().getClassLoader().getResource("pasajero.csv").getFile());
+        File archivo = new File("data/pasajero.csv");
         try{
             List<String> lineas = Files.readAllLines(archivo.toPath());
-            if(numeroLinea >= lineas.size()) {return false;}
+            if(numeroLinea >= lineas.size()) {
+                  System.err.println("Número de línea fuera de rango.");
+                  return false;
+                  }
+            int lineaReal = numeroLinea + 1; //ajusto por el encabezado
             lineas.remove(numeroLinea); //elimina numeroLinea
             Files.write(archivo.toPath(), lineas); //lo reescribo sin numeroLinea
             return true;
@@ -203,7 +213,7 @@ public class PasajeroImp implements PasajeroDAO {
             System.out.println("Pasajero no encontrado para modificar.");
             return ;
         }
-        File archivo = new File (getClass().getClassLoader().getResource("pasajero.csv").getFile());
+        File archivo = new File("data/pasajero.csv");
         try{
             List<String> lineas = Files.readAllLines(archivo.toPath());
             if(numeroLinea >= lineas.size()) {
